@@ -1,0 +1,70 @@
+name: AWS Fargate API
+description: AWS Fargate is a serverless compute engine for containers that works with Amazon ECS and Amazon EKS. It removes the need to provision and manage servers, letting you focus on building applications.
+url: https://aws.amazon.com/fargate/
+image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
+created: 2024-01-01 00:00:00+00:00
+modified: 2024-01-01 00:00:00+00:00
+tags:
+- containers
+- serverless
+- compute
+- docker
+- kubernetes
+apis:
+- name: Amazon ECS API (Fargate)
+  description: API for managing Fargate tasks and services through Amazon ECS
+  baseURL: https://ecs.{region}.amazonaws.com
+  humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
+  documentation: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+  properties:
+  - type: X-documentation
+    url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/Welcome.html
+  - type: X-openapi
+    url: https://api.apis.guru/v2/specs/amazonaws.com/ecs/2014-11-13/openapi.yaml
+  - type: X-pricing
+    url: https://aws.amazon.com/fargate/pricing/
+  - type: X-getting-started
+    url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/getting-started-fargate.html
+  tags:
+  - containers
+  - orchestration
+  - ecs
+- name: Amazon EKS API (Fargate)
+  description: API for managing Fargate pods through Amazon EKS
+  baseURL: https://eks.{region}.amazonaws.com
+  humanURL: https://docs.aws.amazon.com/eks/latest/APIReference/
+  documentation: https://docs.aws.amazon.com/eks/latest/userguide/fargate.html
+  properties:
+  - type: X-documentation
+    url: https://docs.aws.amazon.com/eks/latest/APIReference/Welcome.html
+  - type: X-openapi
+    url: https://api.apis.guru/v2/specs/amazonaws.com/eks/2017-11-01/openapi.yaml
+  - type: X-pricing
+    url: https://aws.amazon.com/fargate/pricing/
+  - type: X-getting-started
+    url: https://docs.aws.amazon.com/eks/latest/userguide/fargate-getting-started.html
+  tags:
+  - kubernetes
+  - containers
+  - eks
+common:
+- type: X-terms-of-service
+  url: https://aws.amazon.com/service-terms/
+- type: X-support
+  url: https://aws.amazon.com/premiumsupport/
+- type: X-console
+  url: https://console.aws.amazon.com/ecs/
+- type: X-authentication
+  url: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
+- type: X-sdk
+  url: https://aws.amazon.com/tools/
+- type: X-cli
+  url: https://aws.amazon.com/cli/
+- type: X-faq
+  url: https://aws.amazon.com/fargate/faqs/
+- type: X-status
+  url: https://status.aws.amazon.com/
+maintainers:
+- name: AWS
+  email: support@aws.amazon.com
+  url: https://aws.amazon.com
