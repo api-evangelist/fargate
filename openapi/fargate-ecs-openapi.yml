@@ -1,0 +1,2499 @@
+openapi: 3.1.0
+info:
+  title: Amazon ECS API (Fargate)
+  description: >-
+    The Amazon ECS API provides programmatic access to manage Fargate tasks and
+    services through Amazon Elastic Container Service. AWS Fargate is a
+    serverless compute engine for containers that removes the need to provision
+    and manage servers. This specification covers the core ECS API operations
+    relevant to Fargate workloads, including registering task definitions with
+    Fargate compatibility, running tasks on Fargate infrastructure, and
+    managing services with the Fargate launch type. All operations use the
+    JSON-RPC style with POST requests and an X-Amz-Target header specifying
+    the action.
+  version: '2014-11-13'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/fargate/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+
+externalDocs:
+  description: AWS Fargate Developer Guide
+  url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
+
+servers:
+  - url: https://ecs.{region}.amazonaws.com
+    description: Amazon ECS regional endpoint
+    variables:
+      region:
+        default: us-east-1
+        description: AWS region
+        enum:
+          - us-east-1
+          - us-east-2
+          - us-west-1
+          - us-west-2
+          - eu-west-1
+          - eu-west-2
+          - eu-west-3
+          - eu-central-1
+          - eu-north-1
+          - ap-southeast-1
+          - ap-southeast-2
+          - ap-northeast-1
+          - ap-northeast-2
+          - ap-south-1
+          - sa-east-1
+          - ca-central-1
+
+security:
+  - aws_sig_v4: []
+
+tags:
+  - name: Task Definitions
+    description: >-
+      Operations for registering and managing ECS task definitions with Fargate
+      compatibility, including CPU, memory, network mode, and container
+      configuration.
+    externalDocs:
+      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterTaskDefinition.html
+  - name: Tasks
+    description: >-
+      Operations for running and managing individual Fargate tasks, including
+      launching tasks, stopping tasks, and querying task status.
+    externalDocs:
+      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+  - name: Services
+    description: >-
+      Operations for creating and managing long-running Fargate services with
+      desired count, load balancing, deployment configuration, and auto
+      scaling.
+    externalDocs:
+      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+  - name: Clusters
+    description: >-
+      Operations for managing ECS clusters that host Fargate tasks and
+      services, including cluster creation, configuration, and capacity
+      provider association.
+    externalDocs:
+      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+
+paths:
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition:
+    post:
+      operationId: registerTaskDefinition
+      summary: Register a Fargate task definition
+      description: >-
+        Registers a new task definition from the supplied family and container
+        definitions. For Fargate tasks, the networkMode must be awsvpc, and
+        task-level cpu and memory values are required. Use the
+        requiresCompatibilities parameter with FARGATE to validate that all
+        parameters meet Fargate requirements. The task definition is used to
+        run tasks directly or as part of a service.
+      tags:
+        - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterTaskDefinition.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/RegisterTaskDefinitionRequest'
+      responses:
+        '200':
+          description: Task definition registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterTaskDefinitionResponse'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition:
+    post:
+      operationId: describeTaskDefinition
+      summary: Describe a task definition
+      description: >-
+        Describes a task definition. You can specify a family and revision to
+        find a specific task definition, or you can provide the family name
+        alone to get the latest ACTIVE revision in that family. This is useful
+        for inspecting the Fargate CPU, memory, and networking configuration
+        of a registered task definition.
+      tags:
+        - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - taskDefinition
+              properties:
+                taskDefinition:
+                  type: string
+                  description: >-
+                    The family and revision (family:revision) or full ARN of
+                    the task definition to describe. If you specify only the
+                    family name, the latest ACTIVE revision is described.
+                include:
+                  type: array
+                  description: >-
+                    Specifies whether to see the resource tags for the task
+                    definition.
+                  items:
+                    type: string
+                    enum:
+                      - TAGS
+      responses:
+        '200':
+          description: Task definition described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinition:
+                    $ref: '#/components/schemas/TaskDefinition'
+                  tags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions:
+    post:
+      operationId: listTaskDefinitions
+      summary: List task definitions
+      description: >-
+        Returns a list of task definitions that are registered to your account.
+        You can filter the results by family name to retrieve all revisions of
+        a particular task definition family. Use the status filter to list only
+        ACTIVE or INACTIVE task definitions.
+      tags:
+        - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTaskDefinitions.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                familyPrefix:
+                  type: string
+                  description: >-
+                    The family name prefix to filter the task definitions with.
+                status:
+                  type: string
+                  description: >-
+                    The task definition status to filter on.
+                  enum:
+                    - ACTIVE
+                    - INACTIVE
+                sort:
+                  type: string
+                  description: >-
+                    The order to sort the results in.
+                  enum:
+                    - ASC
+                    - DESC
+                nextToken:
+                  type: string
+                  description: >-
+                    Token for the next set of results from a previous call.
+                maxResults:
+                  type: integer
+                  description: >-
+                    Maximum number of task definition results.
+                  minimum: 1
+                  maximum: 100
+      responses:
+        '200':
+          description: List of task definition ARNs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinitionArns:
+                    type: array
+                    items:
+                      type: string
+                  nextToken:
+                    type: string
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition:
+    post:
+      operationId: deregisterTaskDefinition
+      summary: Deregister a task definition
+      description: >-
+        Deregisters the specified task definition by family and revision. Upon
+        deregistration, the task definition is marked as INACTIVE. Existing
+        tasks and services that reference an INACTIVE task definition continue
+        to run without disruption. You cannot use an INACTIVE task definition
+        to run new tasks or create new services.
+      tags:
+        - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - taskDefinition
+              properties:
+                taskDefinition:
+                  type: string
+                  description: >-
+                    The family and revision (family:revision) or full ARN of
+                    the task definition to deregister.
+      responses:
+        '200':
+          description: Task definition deregistered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinition:
+                    $ref: '#/components/schemas/TaskDefinition'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask:
+    post:
+      operationId: runTask
+      summary: Run a Fargate task
+      description: >-
+        Starts a new task using the specified task definition. When using the
+        Fargate launch type, tasks run on AWS Fargate serverless infrastructure
+        without the need to manage servers. The networkConfiguration parameter
+        with awsvpcConfiguration is required for Fargate tasks. You can
+        optionally specify a platformVersion, which defaults to LATEST. Each
+        RunTask call can launch up to 10 tasks.
+      tags:
+        - Tasks
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/RunTaskRequest'
+      responses:
+        '200':
+          description: Task launched successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunTaskResponse'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask:
+    post:
+      operationId: stopTask
+      summary: Stop a running task
+      description: >-
+        Stops a running task. When you call StopTask on a Fargate task, the
+        equivalent of docker stop is issued to the containers running in the
+        task. This results in a SIGTERM value and a default 30-second timeout,
+        after which the SIGKILL value is sent and the containers are forcibly
+        stopped. The task transitions through STOPPING to STOPPED.
+      tags:
+        - Tasks
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_StopTask.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - task
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster that hosts the
+                    task to stop.
+                task:
+                  type: string
+                  description: >-
+                    The task ID or full ARN of the task to stop.
+                reason:
+                  type: string
+                  description: >-
+                    An optional message that explains why the task was stopped.
+      responses:
+        '200':
+          description: Task stop initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  task:
+                    $ref: '#/components/schemas/Task'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks:
+    post:
+      operationId: describeTasks
+      summary: Describe one or more tasks
+      description: >-
+        Describes a specified task or tasks. Returns detailed information about
+        each task, including its current status, launch type, platform version,
+        container details, and network configuration. Up to 100 tasks can be
+        described in a single call.
+      tags:
+        - Tasks
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - tasks
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster that hosts the
+                    tasks to describe.
+                tasks:
+                  type: array
+                  description: >-
+                    A list of up to 100 task IDs or full ARNs.
+                  items:
+                    type: string
+                  maxItems: 100
+                include:
+                  type: array
+                  description: >-
+                    Specifies whether to include resource tags for the tasks.
+                  items:
+                    type: string
+                    enum:
+                      - TAGS
+      responses:
+        '200':
+          description: Tasks described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tasks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Task'
+                  failures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Failure'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks:
+    post:
+      operationId: listTasks
+      summary: List tasks in a cluster
+      description: >-
+        Returns a list of tasks. You can filter the results by cluster,
+        service, family, or launch type. Specify launchType FARGATE to list
+        only Fargate tasks. Tasks can also be filtered by desired status or
+        started-by value.
+      tags:
+        - Tasks
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTasks.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster to list tasks
+                    from.
+                serviceName:
+                  type: string
+                  description: >-
+                    The name of the service to filter tasks by.
+                family:
+                  type: string
+                  description: >-
+                    The task definition family name to filter with.
+                launchType:
+                  type: string
+                  description: >-
+                    The launch type to filter tasks by.
+                  enum:
+                    - EC2
+                    - FARGATE
+                    - EXTERNAL
+                desiredStatus:
+                  type: string
+                  description: >-
+                    The task desired status to filter with.
+                  enum:
+                    - RUNNING
+                    - PENDING
+                    - STOPPED
+                startedBy:
+                  type: string
+                  description: >-
+                    The startedBy value to filter tasks by.
+                nextToken:
+                  type: string
+                  description: >-
+                    Token for the next set of results.
+                maxResults:
+                  type: integer
+                  description: >-
+                    Maximum number of task results.
+                  minimum: 1
+                  maximum: 100
+      responses:
+        '200':
+          description: List of task ARNs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskArns:
+                    type: array
+                    items:
+                      type: string
+                  nextToken:
+                    type: string
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateService:
+    post:
+      operationId: createService
+      summary: Create a Fargate service
+      description: >-
+        Creates a new Amazon ECS service that runs and maintains a desired
+        number of tasks. When using the Fargate launch type, tasks are
+        launched on serverless infrastructure without managing servers. A
+        network configuration with awsvpc mode is required for Fargate
+        services. You can configure load balancers, deployment strategies,
+        service discovery, and auto scaling for long-running Fargate
+        workloads.
+      tags:
+        - Services
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateServiceRequest'
+      responses:
+        '200':
+          description: Service created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService:
+    post:
+      operationId: updateService
+      summary: Update a Fargate service
+      description: >-
+        Updates the specified service. You can update the task definition,
+        desired count, deployment configuration, network configuration, and
+        platform version for Fargate services. When you update a service, a
+        new deployment is started that replaces existing tasks with tasks from
+        the new configuration according to the deployment strategy.
+      tags:
+        - Services
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceRequest'
+      responses:
+        '200':
+          description: Service updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService:
+    post:
+      operationId: deleteService
+      summary: Delete a service
+      description: >-
+        Deletes the specified service within a cluster. You can delete a
+        service if you have no running tasks in it and the desired count is
+        zero. If the service uses a load balancer, the load balancer
+        configuration is removed. If the service was created using a Fargate
+        launch type, the tasks are stopped.
+      tags:
+        - Services
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - service
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster that hosts the
+                    service to delete.
+                service:
+                  type: string
+                  description: >-
+                    The name or full ARN of the service to delete.
+                force:
+                  type: boolean
+                  description: >-
+                    If true, allows you to delete a service even if it was not
+                    scaled down to zero tasks. It is only necessary to use this
+                    if the service uses the REPLICA scheduling strategy.
+      responses:
+        '200':
+          description: Service deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeServices:
+    post:
+      operationId: describeServices
+      summary: Describe one or more services
+      description: >-
+        Describes the specified services running in a cluster. Returns
+        detailed information about each service, including its status,
+        task definition, desired and running count, deployments, load
+        balancers, and network configuration.
+      tags:
+        - Services
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServices.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - services
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster that hosts the
+                    services to describe.
+                services:
+                  type: array
+                  description: >-
+                    A list of services to describe. Up to 10 services can be
+                    described in a single operation.
+                  items:
+                    type: string
+                  maxItems: 10
+                include:
+                  type: array
+                  description: >-
+                    Specifies whether to include resource tags for the
+                    services.
+                  items:
+                    type: string
+                    enum:
+                      - TAGS
+      responses:
+        '200':
+          description: Services described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  services:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Service'
+                  failures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Failure'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListServices:
+    post:
+      operationId: listServices
+      summary: List services in a cluster
+      description: >-
+        Returns a list of services running in a cluster. You can filter
+        results by launch type to retrieve only Fargate services. The
+        response includes service ARNs that can be used with
+        DescribeServices for detailed information.
+      tags:
+        - Services
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster to list services
+                    from.
+                launchType:
+                  type: string
+                  description: >-
+                    The launch type to filter services by.
+                  enum:
+                    - EC2
+                    - FARGATE
+                    - EXTERNAL
+                schedulingStrategy:
+                  type: string
+                  description: >-
+                    The scheduling strategy to filter services by.
+                  enum:
+                    - REPLICA
+                    - DAEMON
+                nextToken:
+                  type: string
+                  description: >-
+                    Token for the next set of results.
+                maxResults:
+                  type: integer
+                  description: >-
+                    Maximum number of service results.
+                  minimum: 1
+                  maximum: 100
+      responses:
+        '200':
+          description: List of service ARNs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  serviceArns:
+                    type: array
+                    items:
+                      type: string
+                  nextToken:
+                    type: string
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster:
+    post:
+      operationId: createCluster
+      summary: Create an ECS cluster
+      description: >-
+        Creates a new Amazon ECS cluster. By default, your account receives a
+        default cluster when you launch your first container instance. You can
+        create additional clusters to group Fargate tasks and services. A
+        cluster can be configured with capacity providers including FARGATE
+        and FARGATE_SPOT for serverless compute.
+      tags:
+        - Clusters
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateClusterRequest'
+      responses:
+        '200':
+          description: Cluster created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters:
+    post:
+      operationId: describeClusters
+      summary: Describe one or more clusters
+      description: >-
+        Describes one or more of your clusters. Returns information about
+        the cluster including its status, capacity providers, default
+        capacity provider strategy, active services count, running tasks
+        count, and configuration settings.
+      tags:
+        - Clusters
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeClusters.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                clusters:
+                  type: array
+                  description: >-
+                    A list of up to 100 cluster names or full ARNs to
+                    describe.
+                  items:
+                    type: string
+                  maxItems: 100
+                include:
+                  type: array
+                  description: >-
+                    Additional information to include in the response.
+                  items:
+                    type: string
+                    enum:
+                      - ATTACHMENTS
+                      - CONFIGURATIONS
+                      - SETTINGS
+                      - STATISTICS
+                      - TAGS
+      responses:
+        '200':
+          description: Clusters described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clusters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+                  failures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Failure'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand:
+    post:
+      operationId: executeCommand
+      summary: Execute a command in a Fargate task container
+      description: >-
+        Runs a command remotely and securely inside a container running on a
+        Fargate task. ECS Exec uses AWS Systems Manager Session Manager to
+        establish a connection with the container and uses AWS IAM policies
+        to control access. The task must have been launched with
+        enableExecuteCommand set to true.
+      tags:
+        - Tasks
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ExecuteCommand.html
+      parameters:
+        - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+                - command
+                - interactive
+                - task
+              properties:
+                cluster:
+                  type: string
+                  description: >-
+                    The short name or full ARN of the cluster the task is
+                    running in.
+                container:
+                  type: string
+                  description: >-
+                    The name of the container to execute the command in. If
+                    not specified, the first essential container is used.
+                command:
+                  type: string
+                  description: >-
+                    The command to run inside the container.
+                interactive:
+                  type: boolean
+                  description: >-
+                    Whether to run the command in interactive mode.
+                task:
+                  type: string
+                  description: >-
+                    The task ID or full ARN of the task to run the command in.
+      responses:
+        '200':
+          description: Command session initiated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clusterArn:
+                    type: string
+                  containerArn:
+                    type: string
+                  containerName:
+                    type: string
+                  interactive:
+                    type: boolean
+                  session:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                      streamUrl:
+                        type: string
+                      tokenValue:
+                        type: string
+                  taskArn:
+                    type: string
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  securitySchemes:
+    aws_sig_v4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: >-
+        AWS Signature Version 4 authentication. Requests must be signed
+        using AWS access credentials.
+
+  parameters:
+    X-Amz-Target:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+      description: >-
+        The ECS API action target header used for JSON-RPC style routing.
+
+  responses:
+    ClientError:
+      description: >-
+        Client error. The request was invalid, contained incorrect
+        parameters, or the caller does not have required permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ServerError:
+      description: >-
+        Server error. An internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: >-
+            The error type identifier.
+        message:
+          type: string
+          description: >-
+            A human-readable error message.
+
+    Tag:
+      type: object
+      description: >-
+        A key-value pair used to tag an Amazon ECS resource.
+      properties:
+        key:
+          type: string
+          description: >-
+            The tag key. Tag keys are case-sensitive and must be unique.
+          maxLength: 128
+        value:
+          type: string
+          description: >-
+            The tag value.
+          maxLength: 256
+
+    NetworkConfiguration:
+      type: object
+      description: >-
+        The network configuration for a task or service. Required for Fargate
+        tasks and services.
+      properties:
+        awsvpcConfiguration:
+          $ref: '#/components/schemas/AwsVpcConfiguration'
+
+    AwsVpcConfiguration:
+      type: object
+      description: >-
+        The VPC networking configuration for Fargate tasks, which always use
+        the awsvpc network mode.
+      required:
+        - subnets
+      properties:
+        subnets:
+          type: array
+          description: >-
+            The IDs of the subnets associated with the task or service. All
+            specified subnets must be in the same VPC.
+          items:
+            type: string
+        securityGroups:
+          type: array
+          description: >-
+            The IDs of the security groups associated with the task or
+            service. If no security group is specified, the default security
+            group for the VPC is used.
+          items:
+            type: string
+          maxItems: 5
+        assignPublicIp:
+          type: string
+          description: >-
+            Whether the task's elastic network interface receives a public IP
+            address. A value of ENABLED is required when using public subnets
+            so Fargate tasks can pull container images.
+          enum:
+            - ENABLED
+            - DISABLED
+
+    ContainerDefinition:
+      type: object
+      description: >-
+        A container definition describes a container that is part of a task.
+      required:
+        - name
+        - image
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the container. Up to 255 letters, numbers, underscores,
+            and hyphens.
+          maxLength: 255
+        image:
+          type: string
+          description: >-
+            The image used to start the container. Can be an image in a Docker
+            Hub, Amazon ECR, or another repository.
+        cpu:
+          type: integer
+          description: >-
+            The number of cpu units reserved for the container. For Fargate
+            tasks, the task-level CPU value is used, and this is optional.
+        memory:
+          type: integer
+          description: >-
+            The amount of memory (in MiB) to allocate to the container. For
+            Fargate tasks, the task-level memory value is used, and this is
+            optional.
+        memoryReservation:
+          type: integer
+          description: >-
+            The soft limit (in MiB) of memory to reserve for the container.
+        essential:
+          type: boolean
+          description: >-
+            If true, and the container fails or stops, all other containers
+            in the task are stopped. At least one container must be marked
+            essential in a task definition.
+        portMappings:
+          type: array
+          description: >-
+            Port mappings for the container. For Fargate tasks with awsvpc
+            network mode, only containerPort is used. The hostPort value is
+            the same as containerPort.
+          items:
+            $ref: '#/components/schemas/PortMapping'
+        environment:
+          type: array
+          description: >-
+            Environment variables to pass to the container.
+          items:
+            $ref: '#/components/schemas/KeyValuePair'
+        secrets:
+          type: array
+          description: >-
+            Secrets to pass to the container from AWS Secrets Manager or
+            AWS Systems Manager Parameter Store.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: >-
+                  The name of the environment variable to set in the container.
+              valueFrom:
+                type: string
+                description: >-
+                  The secret ARN or SSM parameter ARN to expose as an
+                  environment variable.
+        logConfiguration:
+          $ref: '#/components/schemas/LogConfiguration'
+        healthCheck:
+          $ref: '#/components/schemas/HealthCheck'
+        command:
+          type: array
+          description: >-
+            The command passed to the container. Overrides the CMD in the
+            Dockerfile.
+          items:
+            type: string
+        entryPoint:
+          type: array
+          description: >-
+            The entry point passed to the container. Overrides the
+            ENTRYPOINT in the Dockerfile.
+          items:
+            type: string
+        workingDirectory:
+          type: string
+          description: >-
+            The working directory to run commands inside the container.
+        user:
+          type: string
+          description: >-
+            The user to use inside the container (UID or username).
+        readonlyRootFilesystem:
+          type: boolean
+          description: >-
+            When true, the container is given read-only access to its root
+            filesystem.
+        dependsOn:
+          type: array
+          description: >-
+            Dependencies defined for container startup and shutdown ordering.
+          items:
+            type: object
+            properties:
+              containerName:
+                type: string
+              condition:
+                type: string
+                enum:
+                  - START
+                  - COMPLETE
+                  - SUCCESS
+                  - HEALTHY
+        mountPoints:
+          type: array
+          description: >-
+            Mount points for data volumes in the container.
+          items:
+            type: object
+            properties:
+              sourceVolume:
+                type: string
+              containerPath:
+                type: string
+              readOnly:
+                type: boolean
+
+    PortMapping:
+      type: object
+      description: >-
+        A port mapping for a container. For Fargate tasks, the containerPort
+        is the only required field. The hostPort is automatically set to match
+        the containerPort.
+      properties:
+        containerPort:
+          type: integer
+          description: >-
+            The port number on the container bound to the host port.
+          minimum: 0
+          maximum: 65535
+        hostPort:
+          type: integer
+          description: >-
+            The port number on the host. For Fargate tasks, this is always
+            the same as the containerPort.
+          minimum: 0
+          maximum: 65535
+        protocol:
+          type: string
+          description: >-
+            The protocol used for the port mapping.
+          enum:
+            - tcp
+            - udp
+          default: tcp
+        name:
+          type: string
+          description: >-
+            The name for the port mapping, used for Service Connect.
+        appProtocol:
+          type: string
+          description: >-
+            The application protocol for the port mapping, used for Service
+            Connect.
+          enum:
+            - http
+            - http2
+            - grpc
+
+    KeyValuePair:
+      type: object
+      description: >-
+        A key-value pair representing an environment variable.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the environment variable.
+        value:
+          type: string
+          description: >-
+            The value of the environment variable.
+
+    LogConfiguration:
+      type: object
+      description: >-
+        Log configuration for the container. Fargate tasks support the
+        awslogs, splunk, and awsfirelens log drivers.
+      required:
+        - logDriver
+      properties:
+        logDriver:
+          type: string
+          description: >-
+            The log driver to use for the container. Fargate supports
+            awslogs, splunk, and awsfirelens.
+          enum:
+            - awslogs
+            - splunk
+            - awsfirelens
+        options:
+          type: object
+          description: >-
+            Configuration options for the log driver. For awslogs, includes
+            awslogs-group, awslogs-region, and awslogs-stream-prefix.
+          additionalProperties:
+            type: string
+        secretOptions:
+          type: array
+          description: >-
+            Secret log configuration options passed to the log driver.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              valueFrom:
+                type: string
+
+    HealthCheck:
+      type: object
+      description: >-
+        Container health check configuration. The health check command is
+        run inside the container.
+      required:
+        - command
+      properties:
+        command:
+          type: array
+          description: >-
+            The command to run to determine container health. Prefix with
+            CMD for shell execution or CMD-SHELL for direct execution.
+          items:
+            type: string
+        interval:
+          type: integer
+          description: >-
+            The period in seconds between health checks. Default is 30.
+          default: 30
+          minimum: 5
+          maximum: 300
+        timeout:
+          type: integer
+          description: >-
+            The time in seconds to wait for a health check to succeed.
+            Default is 5.
+          default: 5
+          minimum: 2
+          maximum: 120
+        retries:
+          type: integer
+          description: >-
+            The number of times to retry a failed health check before the
+            container is considered unhealthy. Default is 3.
+          default: 3
+          minimum: 1
+          maximum: 10
+        startPeriod:
+          type: integer
+          description: >-
+            The grace period in seconds to allow the container to bootstrap
+            before failed health checks count.
+          default: 0
+          minimum: 0
+          maximum: 300
+
+    RuntimePlatform:
+      type: object
+      description: >-
+        The operating system and CPU architecture for the Fargate task.
+      properties:
+        cpuArchitecture:
+          type: string
+          description: >-
+            The CPU architecture. ARM64 is supported for Linux tasks.
+          enum:
+            - X86_64
+            - ARM64
+          default: X86_64
+        operatingSystemFamily:
+          type: string
+          description: >-
+            The operating system family for the Fargate task.
+          enum:
+            - LINUX
+            - WINDOWS_SERVER_2019_FULL
+            - WINDOWS_SERVER_2019_CORE
+            - WINDOWS_SERVER_2022_FULL
+            - WINDOWS_SERVER_2022_CORE
+            - WINDOWS_SERVER_2025_FULL
+            - WINDOWS_SERVER_2025_CORE
+          default: LINUX
+
+    EphemeralStorage:
+      type: object
+      description: >-
+        The amount of ephemeral storage to allocate for the Fargate task.
+        Available on platform version 1.4.0 or later for Linux and 1.0.0
+        or later for Windows.
+      required:
+        - sizeInGiB
+      properties:
+        sizeInGiB:
+          type: integer
+          description: >-
+            The total amount of ephemeral storage in GiB.
+          minimum: 21
+          maximum: 200
+
+    Volume:
+      type: object
+      description: >-
+        A data volume used by containers in a task. Fargate tasks support
+        bind mounts and EFS volumes.
+      properties:
+        name:
+          type: string
+          description: >-
+            The name of the volume, referenced by containers in
+            mountPoints.
+        efsVolumeConfiguration:
+          type: object
+          description: >-
+            Amazon EFS volume configuration for the task.
+          required:
+            - fileSystemId
+          properties:
+            fileSystemId:
+              type: string
+              description: >-
+                The Amazon EFS file system ID.
+            rootDirectory:
+              type: string
+              description: >-
+                The directory within the EFS file system to mount.
+            transitEncryption:
+              type: string
+              description: >-
+                Whether to enable EFS transit encryption.
+              enum:
+                - ENABLED
+                - DISABLED
+            transitEncryptionPort:
+              type: integer
+              description: >-
+                The port to use for encrypted transit.
+            authorizationConfig:
+              type: object
+              properties:
+                accessPointId:
+                  type: string
+                  description: >-
+                    The EFS access point ID.
+                iam:
+                  type: string
+                  description: >-
+                    Whether to use the task IAM role for authorization.
+                  enum:
+                    - ENABLED
+                    - DISABLED
+
+    TaskDefinition:
+      type: object
+      description: >-
+        A Fargate task definition describes the containers and parameters
+        required to run a Fargate task.
+      properties:
+        taskDefinitionArn:
+          type: string
+          description: >-
+            The full ARN of the task definition.
+        family:
+          type: string
+          description: >-
+            The family name for the task definition.
+        revision:
+          type: integer
+          description: >-
+            The revision of the task definition.
+        status:
+          type: string
+          description: >-
+            The status of the task definition.
+          enum:
+            - ACTIVE
+            - INACTIVE
+            - DELETE_IN_PROGRESS
+        containerDefinitions:
+          type: array
+          description: >-
+            The container definitions for the task.
+          items:
+            $ref: '#/components/schemas/ContainerDefinition'
+        cpu:
+          type: string
+          description: >-
+            The task-level CPU value in CPU units. Required for Fargate.
+        memory:
+          type: string
+          description: >-
+            The task-level memory value in MiB. Required for Fargate.
+        networkMode:
+          type: string
+          description: >-
+            The Docker networking mode. Must be awsvpc for Fargate tasks.
+          enum:
+            - awsvpc
+        requiresCompatibilities:
+          type: array
+          description: >-
+            The launch type compatibility requirements.
+          items:
+            type: string
+            enum:
+              - FARGATE
+              - EC2
+        executionRoleArn:
+          type: string
+          description: >-
+            The ARN of the task execution role for pulling images and
+            sending logs.
+        taskRoleArn:
+          type: string
+          description: >-
+            The IAM role that containers in the task can assume.
+        runtimePlatform:
+          $ref: '#/components/schemas/RuntimePlatform'
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+        volumes:
+          type: array
+          description: >-
+            The volumes defined for the task.
+          items:
+            $ref: '#/components/schemas/Volume'
+        registeredAt:
+          type: string
+          format: date-time
+          description: >-
+            The Unix timestamp when the task definition was registered.
+        registeredBy:
+          type: string
+          description: >-
+            The principal that registered the task definition.
+        compatibilities:
+          type: array
+          description: >-
+            The launch type compatibilities for the task definition.
+          items:
+            type: string
+
+    Task:
+      type: object
+      description: >-
+        Details of a running or stopped Fargate task.
+      properties:
+        taskArn:
+          type: string
+          description: >-
+            The ARN of the task.
+        clusterArn:
+          type: string
+          description: >-
+            The ARN of the cluster that hosts the task.
+        taskDefinitionArn:
+          type: string
+          description: >-
+            The ARN of the task definition that the task is using.
+        launchType:
+          type: string
+          description: >-
+            The infrastructure that the task runs on.
+          enum:
+            - FARGATE
+            - EC2
+            - EXTERNAL
+        platformVersion:
+          type: string
+          description: >-
+            The Fargate platform version on which the task runs.
+        platformFamily:
+          type: string
+          description: >-
+            The operating system the task runs on.
+        lastStatus:
+          type: string
+          description: >-
+            The last known status of the task.
+        desiredStatus:
+          type: string
+          description: >-
+            The desired status of the task.
+        cpu:
+          type: string
+          description: >-
+            The CPU units used by the task.
+        memory:
+          type: string
+          description: >-
+            The memory in MiB used by the task.
+        containers:
+          type: array
+          description: >-
+            The containers associated with the task.
+          items:
+            $ref: '#/components/schemas/Container'
+        overrides:
+          $ref: '#/components/schemas/TaskOverride'
+        group:
+          type: string
+          description: >-
+            The name of the task group associated with the task.
+        availabilityZone:
+          type: string
+          description: >-
+            The Availability Zone where the task is running.
+        connectivity:
+          type: string
+          description: >-
+            The connectivity status of the task.
+          enum:
+            - CONNECTED
+            - DISCONNECTED
+        healthStatus:
+          type: string
+          description: >-
+            The health status of the task.
+          enum:
+            - HEALTHY
+            - UNHEALTHY
+            - UNKNOWN
+        enableExecuteCommand:
+          type: boolean
+          description: >-
+            Whether ECS Exec is enabled for the task.
+        startedBy:
+          type: string
+          description: >-
+            The tag specified when the task was started.
+        stoppedReason:
+          type: string
+          description: >-
+            The reason the task was stopped.
+        createdAt:
+          type: string
+          format: date-time
+          description: >-
+            The Unix timestamp when the task was created.
+        startedAt:
+          type: string
+          format: date-time
+          description: >-
+            The Unix timestamp when the task started.
+        stoppedAt:
+          type: string
+          format: date-time
+          description: >-
+            The Unix timestamp when the task was stopped.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+
+    Container:
+      type: object
+      description: >-
+        A container running as part of a task.
+      properties:
+        containerArn:
+          type: string
+          description: >-
+            The ARN of the container.
+        taskArn:
+          type: string
+          description: >-
+            The ARN of the task the container is part of.
+        name:
+          type: string
+          description: >-
+            The name of the container.
+        image:
+          type: string
+          description: >-
+            The image used for the container.
+        imageDigest:
+          type: string
+          description: >-
+            The container image manifest digest.
+        lastStatus:
+          type: string
+          description: >-
+            The last known status of the container.
+        exitCode:
+          type: integer
+          description: >-
+            The exit code returned from the container.
+        healthStatus:
+          type: string
+          description: >-
+            The health status of the container.
+          enum:
+            - HEALTHY
+            - UNHEALTHY
+            - UNKNOWN
+        networkInterfaces:
+          type: array
+          description: >-
+            The network interfaces associated with the container.
+          items:
+            type: object
+            properties:
+              attachmentId:
+                type: string
+              privateIpv4Address:
+                type: string
+              ipv6Address:
+                type: string
+        networkBindings:
+          type: array
+          description: >-
+            The network bindings associated with the container.
+          items:
+            type: object
+            properties:
+              bindIP:
+                type: string
+              containerPort:
+                type: integer
+              hostPort:
+                type: integer
+              protocol:
+                type: string
+
+    TaskOverride:
+      type: object
+      description: >-
+        The overrides associated with a task, used to override task
+        definition values at runtime.
+      properties:
+        containerOverrides:
+          type: array
+          description: >-
+            The container overrides for the task.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: >-
+                  The name of the container to override.
+              command:
+                type: array
+                items:
+                  type: string
+              environment:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeyValuePair'
+              cpu:
+                type: integer
+              memory:
+                type: integer
+              memoryReservation:
+                type: integer
+        cpu:
+          type: string
+          description: >-
+            The CPU override for the task.
+        memory:
+          type: string
+          description: >-
+            The memory override for the task.
+        taskRoleArn:
+          type: string
+          description: >-
+            The IAM role override for the task.
+        executionRoleArn:
+          type: string
+          description: >-
+            The task execution role override.
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+
+    Service:
+      type: object
+      description: >-
+        Details of an ECS service running Fargate tasks.
+      properties:
+        serviceArn:
+          type: string
+          description: >-
+            The ARN of the service.
+        serviceName:
+          type: string
+          description: >-
+            The name of the service.
+        clusterArn:
+          type: string
+          description: >-
+            The ARN of the cluster that hosts the service.
+        taskDefinition:
+          type: string
+          description: >-
+            The task definition ARN used by the service.
+        status:
+          type: string
+          description: >-
+            The status of the service.
+        desiredCount:
+          type: integer
+          description: >-
+            The desired number of tasks for the service.
+        runningCount:
+          type: integer
+          description: >-
+            The number of tasks currently running.
+        pendingCount:
+          type: integer
+          description: >-
+            The number of tasks in a pending state.
+        launchType:
+          type: string
+          description: >-
+            The infrastructure the tasks run on.
+          enum:
+            - FARGATE
+            - EC2
+            - EXTERNAL
+        platformVersion:
+          type: string
+          description: >-
+            The Fargate platform version the tasks run on.
+        platformFamily:
+          type: string
+          description: >-
+            The operating system the tasks run on.
+        schedulingStrategy:
+          type: string
+          description: >-
+            The scheduling strategy for the service.
+          enum:
+            - REPLICA
+            - DAEMON
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        deployments:
+          type: array
+          description: >-
+            The current deployments for the service.
+          items:
+            $ref: '#/components/schemas/Deployment'
+        loadBalancers:
+          type: array
+          description: >-
+            The load balancers associated with the service. Fargate supports
+            Application Load Balancers and Network Load Balancers only.
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        serviceRegistries:
+          type: array
+          description: >-
+            The service discovery registries for the service.
+          items:
+            type: object
+            properties:
+              registryArn:
+                type: string
+              port:
+                type: integer
+              containerName:
+                type: string
+              containerPort:
+                type: integer
+        enableExecuteCommand:
+          type: boolean
+          description: >-
+            Whether ECS Exec is enabled for the service.
+        createdAt:
+          type: string
+          format: date-time
+          description: >-
+            The timestamp when the service was created.
+        createdBy:
+          type: string
+          description: >-
+            The principal that created the service.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    DeploymentConfiguration:
+      type: object
+      description: >-
+        The deployment configuration for a service, controlling how updates
+        are rolled out.
+      properties:
+        maximumPercent:
+          type: integer
+          description: >-
+            The upper limit of the number of tasks allowed during a
+            deployment as a percentage of the desired count. Default is 200%.
+          default: 200
+        minimumHealthyPercent:
+          type: integer
+          description: >-
+            The lower limit of the number of running tasks during a
+            deployment as a percentage of the desired count. Default is 100%.
+          default: 100
+        deploymentCircuitBreaker:
+          type: object
+          description: >-
+            The deployment circuit breaker to automatically roll back
+            unhealthy deployments.
+          properties:
+            enable:
+              type: boolean
+              description: >-
+                Whether to enable the deployment circuit breaker.
+            rollback:
+              type: boolean
+              description: >-
+                Whether to enable automatic rollback on deployment failure.
+
+    Deployment:
+      type: object
+      description: >-
+        Details of a service deployment.
+      properties:
+        id:
+          type: string
+          description: >-
+            The deployment ID.
+        status:
+          type: string
+          description: >-
+            The deployment status.
+        taskDefinition:
+          type: string
+          description: >-
+            The task definition ARN for the deployment.
+        desiredCount:
+          type: integer
+          description: >-
+            The desired number of tasks in the deployment.
+        runningCount:
+          type: integer
+          description: >-
+            The number of running tasks in the deployment.
+        pendingCount:
+          type: integer
+          description: >-
+            The number of pending tasks in the deployment.
+        launchType:
+          type: string
+          description: >-
+            The launch type used by the deployment.
+        platformVersion:
+          type: string
+          description: >-
+            The Fargate platform version used by the deployment.
+        rolloutState:
+          type: string
+          description: >-
+            The rollout state of the deployment.
+          enum:
+            - COMPLETED
+            - FAILED
+            - IN_PROGRESS
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+
+    LoadBalancer:
+      type: object
+      description: >-
+        The load balancer configuration for a service. Fargate services
+        support Application Load Balancers (ALB) and Network Load Balancers
+        (NLB) with IP target type.
+      properties:
+        targetGroupArn:
+          type: string
+          description: >-
+            The ARN of the Elastic Load Balancing target group.
+        containerName:
+          type: string
+          description: >-
+            The name of the container to route traffic to.
+        containerPort:
+          type: integer
+          description: >-
+            The port on the container to route traffic to.
+
+    Cluster:
+      type: object
+      description: >-
+        An ECS cluster that can host Fargate tasks and services.
+      properties:
+        clusterArn:
+          type: string
+          description: >-
+            The ARN of the cluster.
+        clusterName:
+          type: string
+          description: >-
+            The name of the cluster.
+        status:
+          type: string
+          description: >-
+            The status of the cluster.
+        capacityProviders:
+          type: array
+          description: >-
+            The capacity providers associated with the cluster. Includes
+            FARGATE and FARGATE_SPOT for serverless compute.
+          items:
+            type: string
+        defaultCapacityProviderStrategy:
+          type: array
+          description: >-
+            The default capacity provider strategy for the cluster.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        registeredContainerInstancesCount:
+          type: integer
+          description: >-
+            The number of container instances registered with the cluster.
+        runningTasksCount:
+          type: integer
+          description: >-
+            The number of tasks currently running on the cluster.
+        pendingTasksCount:
+          type: integer
+          description: >-
+            The number of tasks in a pending state on the cluster.
+        activeServicesCount:
+          type: integer
+          description: >-
+            The number of active services on the cluster.
+        settings:
+          type: array
+          description: >-
+            The cluster settings, such as Container Insights.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    CapacityProviderStrategyItem:
+      type: object
+      description: >-
+        A capacity provider strategy item specifying a capacity provider
+        and its weight and base values. Use FARGATE or FARGATE_SPOT for
+        serverless compute.
+      required:
+        - capacityProvider
+      properties:
+        capacityProvider:
+          type: string
+          description: >-
+            The short name of the capacity provider. Valid Fargate values
+            are FARGATE and FARGATE_SPOT.
+        weight:
+          type: integer
+          description: >-
+            The relative percentage of the total number of tasks that
+            should use the specified capacity provider.
+          minimum: 0
+          maximum: 1000
+        base:
+          type: integer
+          description: >-
+            The number of tasks, at minimum, to run on the specified
+            capacity provider. Only one capacity provider in a strategy
+            can have a base defined.
+          minimum: 0
+          maximum: 100000
+
+    Failure:
+      type: object
+      description: >-
+        A failed resource from a batch operation.
+      properties:
+        arn:
+          type: string
+          description: >-
+            The ARN of the failed resource.
+        reason:
+          type: string
+          description: >-
+            The reason for the failure.
+        detail:
+          type: string
+          description: >-
+            The details of the failure.
+
+    RegisterTaskDefinitionRequest:
+      type: object
+      description: >-
+        Request to register a Fargate task definition.
+      required:
+        - family
+        - containerDefinitions
+      properties:
+        family:
+          type: string
+          description: >-
+            The family name for the task definition. Up to 255 characters
+            consisting of letters, numbers, underscores, and hyphens.
+          maxLength: 255
+          pattern: '^[a-zA-Z0-9_-]+$'
+        containerDefinitions:
+          type: array
+          description: >-
+            The container definitions for the task.
+          items:
+            $ref: '#/components/schemas/ContainerDefinition'
+        cpu:
+          type: string
+          description: >-
+            The task-level CPU value in CPU units. Required for Fargate.
+            Valid values are 256, 512, 1024, 2048, 4096, 8192, and 16384.
+          enum:
+            - '256'
+            - '512'
+            - '1024'
+            - '2048'
+            - '4096'
+            - '8192'
+            - '16384'
+        memory:
+          type: string
+          description: >-
+            The task-level memory value in MiB. Required for Fargate. The
+            valid values depend on the CPU value specified.
+        networkMode:
+          type: string
+          description: >-
+            The Docker networking mode. Must be awsvpc for Fargate tasks.
+          enum:
+            - awsvpc
+        requiresCompatibilities:
+          type: array
+          description: >-
+            The launch type compatibility to validate against. Use FARGATE
+            to ensure the task definition is Fargate-compatible.
+          items:
+            type: string
+            enum:
+              - FARGATE
+              - EC2
+        executionRoleArn:
+          type: string
+          description: >-
+            The ARN of the task execution role that grants the ECS agent
+            permission to pull images and publish logs.
+        taskRoleArn:
+          type: string
+          description: >-
+            The IAM role that containers in the task can assume for AWS
+            API access.
+        runtimePlatform:
+          $ref: '#/components/schemas/RuntimePlatform'
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+        volumes:
+          type: array
+          description: >-
+            The volumes to make available for containers in the task.
+          items:
+            $ref: '#/components/schemas/Volume'
+        tags:
+          type: array
+          description: >-
+            Tags to apply to the task definition.
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    RegisterTaskDefinitionResponse:
+      type: object
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/TaskDefinition'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    RunTaskRequest:
+      type: object
+      description: >-
+        Request to run a Fargate task.
+      required:
+        - taskDefinition
+      properties:
+        cluster:
+          type: string
+          description: >-
+            The short name or full ARN of the cluster on which to run the
+            task. If not specified, the default cluster is used.
+        taskDefinition:
+          type: string
+          description: >-
+            The family and revision (family:revision) or full ARN of the
+            task definition to run.
+        count:
+          type: integer
+          description: >-
+            The number of instantiations of the task to place. Maximum 10.
+          minimum: 1
+          maximum: 10
+          default: 1
+        launchType:
+          type: string
+          description: >-
+            The infrastructure to run the task on. Use FARGATE for
+            serverless compute.
+          enum:
+            - FARGATE
+            - EC2
+            - EXTERNAL
+        capacityProviderStrategy:
+          type: array
+          description: >-
+            The capacity provider strategy for the task. Cannot be used
+            with launchType. Use FARGATE and FARGATE_SPOT providers.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        platformVersion:
+          type: string
+          description: >-
+            The Fargate platform version to run the task on. Defaults to
+            LATEST.
+          default: LATEST
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        overrides:
+          $ref: '#/components/schemas/TaskOverride'
+        enableExecuteCommand:
+          type: boolean
+          description: >-
+            Whether to enable ECS Exec for the tasks, allowing you to run
+            commands inside the containers.
+        enableECSManagedTags:
+          type: boolean
+          description: >-
+            Whether to enable Amazon ECS managed tags for the task.
+        propagateTags:
+          type: string
+          description: >-
+            Specifies whether to propagate tags from the task definition
+            to the task.
+          enum:
+            - TASK_DEFINITION
+            - SERVICE
+            - NONE
+        group:
+          type: string
+          description: >-
+            The name of the task group to associate with the task.
+        startedBy:
+          type: string
+          description: >-
+            An optional tag to identify who started the task.
+        clientToken:
+          type: string
+          description: >-
+            An identifier to ensure the idempotency of the request.
+        tags:
+          type: array
+          description: >-
+            Tags to apply to the task.
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    RunTaskResponse:
+      type: object
+      properties:
+        tasks:
+          type: array
+          description: >-
+            The tasks that were started.
+          items:
+            $ref: '#/components/schemas/Task'
+        failures:
+          type: array
+          description: >-
+            Any failures associated with the call.
+          items:
+            $ref: '#/components/schemas/Failure'
+
+    CreateServiceRequest:
+      type: object
+      description: >-
+        Request to create a Fargate service.
+      required:
+        - serviceName
+      properties:
+        cluster:
+          type: string
+          description: >-
+            The short name or full ARN of the cluster on which to create
+            the service.
+        serviceName:
+          type: string
+          description: >-
+            The name of the service. Up to 255 characters.
+          maxLength: 255
+        taskDefinition:
+          type: string
+          description: >-
+            The family and revision (family:revision) or full ARN of the
+            task definition to run in the service.
+        desiredCount:
+          type: integer
+          description: >-
+            The number of task instances to place and keep running.
+          minimum: 0
+        launchType:
+          type: string
+          description: >-
+            The infrastructure on which to run the service. Use FARGATE
+            for serverless compute.
+          enum:
+            - FARGATE
+            - EC2
+            - EXTERNAL
+        capacityProviderStrategy:
+          type: array
+          description: >-
+            The capacity provider strategy for the service. Cannot be used
+            with launchType.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        platformVersion:
+          type: string
+          description: >-
+            The Fargate platform version to run the service on.
+          default: LATEST
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        loadBalancers:
+          type: array
+          description: >-
+            The load balancer configuration for the service. Fargate
+            supports ALB and NLB with IP target type only.
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        schedulingStrategy:
+          type: string
+          description: >-
+            The scheduling strategy to use for the service.
+          enum:
+            - REPLICA
+            - DAEMON
+          default: REPLICA
+        enableExecuteCommand:
+          type: boolean
+          description: >-
+            Whether to enable ECS Exec for the tasks in the service.
+        enableECSManagedTags:
+          type: boolean
+          description: >-
+            Whether to enable Amazon ECS managed tags for the tasks.
+        propagateTags:
+          type: string
+          description: >-
+            Whether to propagate tags from the task definition or
+            service to the tasks.
+          enum:
+            - TASK_DEFINITION
+            - SERVICE
+            - NONE
+        serviceRegistries:
+          type: array
+          description: >-
+            The service discovery configuration for the service.
+          items:
+            type: object
+            properties:
+              registryArn:
+                type: string
+              port:
+                type: integer
+              containerName:
+                type: string
+              containerPort:
+                type: integer
+        tags:
+          type: array
+          description: >-
+            Tags to apply to the service.
+          items:
+            $ref: '#/components/schemas/Tag'
+
+    UpdateServiceRequest:
+      type: object
+      description: >-
+        Request to update a Fargate service.
+      required:
+        - service
+      properties:
+        cluster:
+          type: string
+          description: >-
+            The short name or full ARN of the cluster that hosts the
+            service.
+        service:
+          type: string
+          description: >-
+            The name or ARN of the service to update.
+        taskDefinition:
+          type: string
+          description: >-
+            The family and revision or full ARN of the new task definition.
+        desiredCount:
+          type: integer
+          description: >-
+            The new desired count for the service.
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        platformVersion:
+          type: string
+          description: >-
+            The new Fargate platform version for the service.
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        enableExecuteCommand:
+          type: boolean
+          description: >-
+            Whether to enable ECS Exec for the service.
+        forceNewDeployment:
+          type: boolean
+          description: >-
+            Whether to force a new deployment of the service even if the
+            service configuration has not changed.
+        loadBalancers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+
+    CreateClusterRequest:
+      type: object
+      description: >-
+        Request to create an ECS cluster for Fargate workloads.
+      properties:
+        clusterName:
+          type: string
+          description: >-
+            The name of the cluster. Up to 255 characters.
+          maxLength: 255
+        capacityProviders:
+          type: array
+          description: >-
+            The capacity providers to associate with the cluster. Use
+            FARGATE and FARGATE_SPOT for serverless compute.
+          items:
+            type: string
+        defaultCapacityProviderStrategy:
+          type: array
+          description: >-
+            The default capacity provider strategy. Tasks launched without
+            specifying a capacity provider or launch type will use this
+            strategy.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        settings:
+          type: array
+          description: >-
+            Cluster settings, such as enabling Container Insights.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                enum:
+                  - containerInsights
+              value:
+                type: string
+                enum:
+                  - enabled
+                  - disabled
+        tags:
+          type: array
+          description: >-
+            Tags to apply to the cluster.
+          items:
+            $ref: '#/components/schemas/Tag'
