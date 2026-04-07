@@ -53,6 +53,14 @@ security:
   - aws_sig_v4: []
 
 tags:
+  - name: Clusters
+    description: >-
+      Operations for managing ECS clusters that host Fargate tasks and
+      services, including cluster creation, configuration, and capacity
+      provider association.
+    externalDocs:
+      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+
   - name: Task Definitions
     description: >-
       Operations for registering and managing ECS task definitions with Fargate
@@ -66,21 +74,6 @@ tags:
       launching tasks, stopping tasks, and querying task status.
     externalDocs:
       url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html
-  - name: Services
-    description: >-
-      Operations for creating and managing long-running Fargate services with
-      desired count, load balancing, deployment configuration, and auto
-      scaling.
-    externalDocs:
-      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
-  - name: Clusters
-    description: >-
-      Operations for managing ECS clusters that host Fargate tasks and
-      services, including cluster creation, configuration, and capacity
-      provider association.
-    externalDocs:
-      url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
-
 paths:
   /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition:
     post:
@@ -539,8 +532,7 @@ paths:
         services. You can configure load balancers, deployment strategies,
         service discovery, and auto scaling for long-running Fargate
         workloads.
-      tags:
-        - Services
+      tags: []
       externalDocs:
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateService.html
       parameters:
@@ -576,8 +568,7 @@ paths:
         platform version for Fargate services. When you update a service, a
         new deployment is started that replaces existing tasks with tasks from
         the new configuration according to the deployment strategy.
-      tags:
-        - Services
+      tags: []
       externalDocs:
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
       parameters:
@@ -613,8 +604,7 @@ paths:
         zero. If the service uses a load balancer, the load balancer
         configuration is removed. If the service was created using a Fargate
         launch type, the tasks are stopped.
-      tags:
-        - Services
+      tags: []
       externalDocs:
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteService.html
       parameters:
@@ -667,8 +657,7 @@ paths:
         detailed information about each service, including its status,
         task definition, desired and running count, deployments, load
         balancers, and network configuration.
-      tags:
-        - Services
+      tags: []
       externalDocs:
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeServices.html
       parameters:
@@ -734,8 +723,7 @@ paths:
         results by launch type to retrieve only Fargate services. The
         response includes service ARNs that can be used with
         DescribeServices for detailed information.
-      tags:
-        - Services
+      tags: []
       externalDocs:
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListServices.html
       parameters:
