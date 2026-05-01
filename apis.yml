@@ -8,7 +8,7 @@ description: >-
 url: https://aws.amazon.com/fargate/
 image: https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png
 created: '2024-01-01'
-modified: '2026-03-16'
+modified: '2026-04-28'
 specificationVersion: '0.19'
 tags:
   - Compute
@@ -31,6 +31,8 @@ apis:
         url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
       - type: OpenAPI
         url: https://api.apis.guru/v2/specs/amazonaws.com/ecs/2014-11-13/openapi.yaml
+      - type: OpenAPI
+        url: https://raw.githubusercontent.com/api-evangelist/fargate/refs/heads/main/openapi/fargate-ecs-openapi.yml
       - type: API Reference
         url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/Welcome.html
       - type: API Operations
