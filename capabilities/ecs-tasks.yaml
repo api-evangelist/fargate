@@ -1,0 +1,250 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: AWS Fargate Amazon ECS API (Fargate) — Tasks
+  description: 'AWS Fargate Amazon ECS API (Fargate) — Tasks. 5 operations. Lead operation: AWS Fargate Describe one or more
+    tasks. Self-contained Naftiko capability covering one Fargate business surface.'
+  tags:
+  - Fargate
+  - Tasks
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    FARGATE_API_KEY: FARGATE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: ecs-tasks
+    baseUri: https://ecs.{region}.amazonaws.com
+    description: AWS Fargate Amazon ECS API (Fargate) — Tasks business capability. Self-contained, no shared references.
+    resources:
+    - name: '#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks'
+      path: /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks
+      operations:
+      - name: describetasks
+        method: POST
+        description: AWS Fargate Describe one or more tasks
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand'
+      path: /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand
+      operations:
+      - name: executecommand
+        method: POST
+        description: AWS Fargate Execute a command in a Fargate task container
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks'
+      path: /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks
+      operations:
+      - name: listtasks
+        method: POST
+        description: AWS Fargate List tasks in a cluster
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask'
+      path: /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask
+      operations:
+      - name: runtask
+        method: POST
+        description: AWS Fargate Run a Fargate task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: '#X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask'
+      path: /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask
+      operations:
+      - name: stoptask
+        method: POST
+        description: AWS Fargate Stop a running task
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.FARGATE_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: ecs-tasks-rest
+    port: 8080
+    description: REST adapter for AWS Fargate Amazon ECS API (Fargate) — Tasks. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/x-amz-target-amazonec2containerservicev20141113-describetasks
+      name: x-amz-target-amazonec2containerservicev20141113-describetasks
+      description: 'REST surface for #X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks.'
+      operations:
+      - method: POST
+        name: describetasks
+        description: AWS Fargate Describe one or more tasks
+        call: ecs-tasks.describetasks
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/x-amz-target-amazonec2containerservicev20141113-executecommand
+      name: x-amz-target-amazonec2containerservicev20141113-executecommand
+      description: 'REST surface for #X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand.'
+      operations:
+      - method: POST
+        name: executecommand
+        description: AWS Fargate Execute a command in a Fargate task container
+        call: ecs-tasks.executecommand
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/x-amz-target-amazonec2containerservicev20141113-listtasks
+      name: x-amz-target-amazonec2containerservicev20141113-listtasks
+      description: 'REST surface for #X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks.'
+      operations:
+      - method: POST
+        name: listtasks
+        description: AWS Fargate List tasks in a cluster
+        call: ecs-tasks.listtasks
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/x-amz-target-amazonec2containerservicev20141113-runtask
+      name: x-amz-target-amazonec2containerservicev20141113-runtask
+      description: 'REST surface for #X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask.'
+      operations:
+      - method: POST
+        name: runtask
+        description: AWS Fargate Run a Fargate task
+        call: ecs-tasks.runtask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/x-amz-target-amazonec2containerservicev20141113-stoptask
+      name: x-amz-target-amazonec2containerservicev20141113-stoptask
+      description: 'REST surface for #X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask.'
+      operations:
+      - method: POST
+        name: stoptask
+        description: AWS Fargate Stop a running task
+        call: ecs-tasks.stoptask
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: ecs-tasks-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for AWS Fargate Amazon ECS API (Fargate) — Tasks. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: aws-fargate-describe-one-more
+      description: AWS Fargate Describe one or more tasks
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ecs-tasks.describetasks
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aws-fargate-execute-command-fargate
+      description: AWS Fargate Execute a command in a Fargate task container
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ecs-tasks.executecommand
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aws-fargate-list-tasks-cluster
+      description: AWS Fargate List tasks in a cluster
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: ecs-tasks.listtasks
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aws-fargate-run-fargate-task
+      description: AWS Fargate Run a Fargate task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ecs-tasks.runtask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: aws-fargate-stop-running-task
+      description: AWS Fargate Stop a running task
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: ecs-tasks.stoptask
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
