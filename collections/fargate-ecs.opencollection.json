@@ -1,0 +1,386 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS Fargate Amazon ECS API (Fargate)",
+    "version": "2014-11-13"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Task Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Register a Fargate task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new task definition from the supplied family and container definitions. For Fargate tasks, the networkMode must be awsvpc, and task-level cpu and memory values are required. Use the requiresCompatibilities parameter with FARGATE to validate that all parameters meet Fargate requirements. The task definition is used to run tasks directly or as part of a service."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Describe a task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes a task definition. You can specify a family and revision to find a specific task definition, or you can provide the family name alone to get the latest ACTIVE revision in that family. This is useful for inspecting the Fargate CPU, memory, and networking configuration of a registered task definition."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate List task definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of task definitions that are registered to your account. You can filter the results by family name to retrieve all revisions of a particular task definition family. Use the status filter to list only ACTIVE or INACTIVE task definitions."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Deregister a task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as INACTIVE. Existing tasks and services that reference an INACTIVE task definition continue to run without disruption. You cannot use an INACTIVE task definition to run new tasks or create new services."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Run a Fargate task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Starts a new task using the specified task definition. When using the Fargate launch type, tasks run on AWS Fargate serverless infrastructure without the need to manage servers. The networkConfiguration parameter with awsvpcConfiguration is required for Fargate tasks. You can optionally specify a platformVersion, which defaults to LATEST. Each RunTask call can launch up to 10 tasks."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Stop a running task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stops a running task. When you call StopTask on a Fargate task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. The task transitions through STOPPING to STOPPED."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Describe one or more tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes a specified task or tasks. Returns detailed information about each task, including its current status, launch type, platform version, container details, and network configuration. Up to 100 tasks can be described in a single call."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate List tasks in a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of tasks. You can filter the results by cluster, service, family, or launch type. Specify launchType FARGATE to list only Fargate tasks. Tasks can also be filtered by desired status or started-by value."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Execute a command in a Fargate task container",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs a command remotely and securely inside a container running on a Fargate task. ECS Exec uses AWS Systems Manager Session Manager to establish a connection with the container and uses AWS IAM policies to control access. The task must have been launched with enableExecuteCommand set to true."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Default",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Create a Fargate service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateService",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Amazon ECS service that runs and maintains a desired number of tasks. When using the Fargate launch type, tasks are launched on serverless infrastructure without managing servers. A network configuration with awsvpc mode is required for Fargate services. You can configure load balancers, deployment strategies, service discovery, and auto scaling for long-running Fargate workloads."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Update a Fargate service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified service. You can update the task definition, desired count, deployment configuration, network configuration, and platform version for Fargate services. When you update a service, a new deployment is started that replaces existing tasks with tasks from the new configuration according to the deployment strategy."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the specified service within a cluster. You can delete a service if you have no running tasks in it and the desired count is zero. If the service uses a load balancer, the load balancer configuration is removed. If the service was created using a Fargate launch type, the tasks are stopped."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Describe one or more services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeServices",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the specified services running in a cluster. Returns detailed information about each service, including its status, task definition, desired and running count, deployments, load balancers, and network configuration."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate List services in a cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListServices",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of services running in a cluster. You can filter results by launch type to retrieve only Fargate services. The response includes service ARNs that can be used with DescribeServices for detailed information."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Clusters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Create an ECS cluster",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. You can create additional clusters to group Fargate tasks and services. A cluster can be configured with capacity providers including FARGATE and FARGATE_SPOT for serverless compute."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Describe one or more clusters",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes one or more of your clusters. Returns information about the cluster including its status, capacity providers, default capacity provider strategy, active services count, running tasks count, and configuration settings."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
