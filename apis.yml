@@ -139,7 +139,7 @@ common:
     url: https://aws.amazon.com/service-terms/
   - type: PrivacyPolicy
     url: https://aws.amazon.com/privacy/
-  - type: SLA
+  - type: ServiceLevelAgreement
     url: https://aws.amazon.com/ecs/sla/
   - type: Support
     url: https://aws.amazon.com/premiumsupport/
