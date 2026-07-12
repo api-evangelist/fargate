@@ -107,6 +107,14 @@ apis:
       - Kubernetes
       - Serverless
 common:
+  - type: TrustCenter
+    url: security/fargate-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/fargate-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/fargate-domain-security.yml
+  - type: Authentication
+    url: authentication/fargate-authentication.yml
   - type: Portal
     url: https://aws.amazon.com/fargate/
   - type: Documentation
