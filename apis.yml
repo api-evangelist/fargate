@@ -107,6 +107,8 @@ apis:
       - Kubernetes
       - Serverless
 common:
+  - type: AgenticAccess
+    url: agentic-access/fargate-agentic-access.yml
   - type: TrustCenter
     url: security/fargate-trust-center.yml
   - type: VulnerabilityDisclosure
