@@ -1,0 +1,302 @@
+openapi: 3.1.0
+info:
+  title: AWS Fargate Amazon ECS API (Fargate) Clusters API
+  description: The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.
+  version: '2014-11-13'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/fargate/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://ecs.{region}.amazonaws.com
+  description: Amazon ECS regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sig_v4: []
+tags:
+- name: Clusters
+  description: Operations for managing ECS clusters that host Fargate tasks and services, including cluster creation, configuration, and capacity provider association.
+  externalDocs:
+    url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+paths:
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster:
+    post:
+      operationId: createCluster
+      summary: AWS Fargate Create an ECS cluster
+      description: Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. You can create additional clusters to group Fargate tasks and services. A cluster can be configured with capacity providers including FARGATE and FARGATE_SPOT for serverless compute.
+      tags:
+      - Clusters
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CreateCluster.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/CreateClusterRequest'
+      responses:
+        '200':
+          description: Cluster created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cluster:
+                    $ref: '#/components/schemas/Cluster'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters:
+    post:
+      operationId: describeClusters
+      summary: AWS Fargate Describe one or more clusters
+      description: Describes one or more of your clusters. Returns information about the cluster including its status, capacity providers, default capacity provider strategy, active services count, running tasks count, and configuration settings.
+      tags:
+      - Clusters
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeClusters.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                clusters:
+                  type: array
+                  description: A list of up to 100 cluster names or full ARNs to describe.
+                  items:
+                    type: string
+                  maxItems: 100
+                include:
+                  type: array
+                  description: Additional information to include in the response.
+                  items:
+                    type: string
+                    enum:
+                    - ATTACHMENTS
+                    - CONFIGURATIONS
+                    - SETTINGS
+                    - STATISTICS
+                    - TAGS
+      responses:
+        '200':
+          description: Clusters described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  clusters:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Cluster'
+                  failures:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Failure'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    Failure:
+      type: object
+      description: A failed resource from a batch operation.
+      properties:
+        arn:
+          type: string
+          description: The ARN of the failed resource.
+        reason:
+          type: string
+          description: The reason for the failure.
+        detail:
+          type: string
+          description: The details of the failure.
+    CreateClusterRequest:
+      type: object
+      description: Request to create an ECS cluster for Fargate workloads.
+      properties:
+        clusterName:
+          type: string
+          description: The name of the cluster. Up to 255 characters.
+          maxLength: 255
+        capacityProviders:
+          type: array
+          description: The capacity providers to associate with the cluster. Use FARGATE and FARGATE_SPOT for serverless compute.
+          items:
+            type: string
+        defaultCapacityProviderStrategy:
+          type: array
+          description: The default capacity provider strategy. Tasks launched without specifying a capacity provider or launch type will use this strategy.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        settings:
+          type: array
+          description: Cluster settings, such as enabling Container Insights.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                enum:
+                - containerInsights
+              value:
+                type: string
+                enum:
+                - enabled
+                - disabled
+        tags:
+          type: array
+          description: Tags to apply to the cluster.
+          items:
+            $ref: '#/components/schemas/Tag'
+    CapacityProviderStrategyItem:
+      type: object
+      description: A capacity provider strategy item specifying a capacity provider and its weight and base values. Use FARGATE or FARGATE_SPOT for serverless compute.
+      required:
+      - capacityProvider
+      properties:
+        capacityProvider:
+          type: string
+          description: The short name of the capacity provider. Valid Fargate values are FARGATE and FARGATE_SPOT.
+        weight:
+          type: integer
+          description: The relative percentage of the total number of tasks that should use the specified capacity provider.
+          minimum: 0
+          maximum: 1000
+        base:
+          type: integer
+          description: The number of tasks, at minimum, to run on the specified capacity provider. Only one capacity provider in a strategy can have a base defined.
+          minimum: 0
+          maximum: 100000
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The error type identifier.
+        message:
+          type: string
+          description: A human-readable error message.
+    Cluster:
+      type: object
+      description: An ECS cluster that can host Fargate tasks and services.
+      properties:
+        clusterArn:
+          type: string
+          description: The ARN of the cluster.
+        clusterName:
+          type: string
+          description: The name of the cluster.
+        status:
+          type: string
+          description: The status of the cluster.
+        capacityProviders:
+          type: array
+          description: The capacity providers associated with the cluster. Includes FARGATE and FARGATE_SPOT for serverless compute.
+          items:
+            type: string
+        defaultCapacityProviderStrategy:
+          type: array
+          description: The default capacity provider strategy for the cluster.
+          items:
+            $ref: '#/components/schemas/CapacityProviderStrategyItem'
+        registeredContainerInstancesCount:
+          type: integer
+          description: The number of container instances registered with the cluster.
+        runningTasksCount:
+          type: integer
+          description: The number of tasks currently running on the cluster.
+        pendingTasksCount:
+          type: integer
+          description: The number of tasks in a pending state on the cluster.
+        activeServicesCount:
+          type: integer
+          description: The number of active services on the cluster.
+        settings:
+          type: array
+          description: The cluster settings, such as Container Insights.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              value:
+                type: string
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    Tag:
+      type: object
+      description: A key-value pair used to tag an Amazon ECS resource.
+      properties:
+        key:
+          type: string
+          description: The tag key. Tag keys are case-sensitive and must be unique.
+          maxLength: 128
+        value:
+          type: string
+          description: The tag value.
+          maxLength: 256
+  parameters:
+    X-Amz-Target:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+      description: The ECS API action target header used for JSON-RPC style routing.
+  responses:
+    ServerError:
+      description: Server error. An internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ClientError:
+      description: Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    aws_sig_v4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests must be signed using AWS access credentials.
+externalDocs:
+  description: AWS Fargate Developer Guide
+  url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html

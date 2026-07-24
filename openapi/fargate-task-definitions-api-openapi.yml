@@ -1,0 +1,689 @@
+openapi: 3.1.0
+info:
+  title: AWS Fargate Amazon ECS API (Fargate) Clusters Task Definitions API
+  description: The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.
+  version: '2014-11-13'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/fargate/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://ecs.{region}.amazonaws.com
+  description: Amazon ECS regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sig_v4: []
+tags:
+- name: Task Definitions
+  description: Operations for registering and managing ECS task definitions with Fargate compatibility, including CPU, memory, network mode, and container configuration.
+  externalDocs:
+    url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterTaskDefinition.html
+paths:
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition:
+    post:
+      operationId: registerTaskDefinition
+      summary: AWS Fargate Register a Fargate task definition
+      description: Registers a new task definition from the supplied family and container definitions. For Fargate tasks, the networkMode must be awsvpc, and task-level cpu and memory values are required. Use the requiresCompatibilities parameter with FARGATE to validate that all parameters meet Fargate requirements. The task definition is used to run tasks directly or as part of a service.
+      tags:
+      - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RegisterTaskDefinition.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/RegisterTaskDefinitionRequest'
+      responses:
+        '200':
+          description: Task definition registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegisterTaskDefinitionResponse'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition:
+    post:
+      operationId: describeTaskDefinition
+      summary: AWS Fargate Describe a task definition
+      description: Describes a task definition. You can specify a family and revision to find a specific task definition, or you can provide the family name alone to get the latest ACTIVE revision in that family. This is useful for inspecting the Fargate CPU, memory, and networking configuration of a registered task definition.
+      tags:
+      - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTaskDefinition.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+              - taskDefinition
+              properties:
+                taskDefinition:
+                  type: string
+                  description: The family and revision (family:revision) or full ARN of the task definition to describe. If you specify only the family name, the latest ACTIVE revision is described.
+                include:
+                  type: array
+                  description: Specifies whether to see the resource tags for the task definition.
+                  items:
+                    type: string
+                    enum:
+                    - TAGS
+      responses:
+        '200':
+          description: Task definition described successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinition:
+                    $ref: '#/components/schemas/TaskDefinition'
+                  tags:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Tag'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions:
+    post:
+      operationId: listTaskDefinitions
+      summary: AWS Fargate List task definitions
+      description: Returns a list of task definitions that are registered to your account. You can filter the results by family name to retrieve all revisions of a particular task definition family. Use the status filter to list only ACTIVE or INACTIVE task definitions.
+      tags:
+      - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_ListTaskDefinitions.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              properties:
+                familyPrefix:
+                  type: string
+                  description: The family name prefix to filter the task definitions with.
+                status:
+                  type: string
+                  description: The task definition status to filter on.
+                  enum:
+                  - ACTIVE
+                  - INACTIVE
+                sort:
+                  type: string
+                  description: The order to sort the results in.
+                  enum:
+                  - ASC
+                  - DESC
+                nextToken:
+                  type: string
+                  description: Token for the next set of results from a previous call.
+                maxResults:
+                  type: integer
+                  description: Maximum number of task definition results.
+                  minimum: 1
+                  maximum: 100
+      responses:
+        '200':
+          description: List of task definition ARNs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinitionArns:
+                    type: array
+                    items:
+                      type: string
+                  nextToken:
+                    type: string
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition:
+    post:
+      operationId: deregisterTaskDefinition
+      summary: AWS Fargate Deregister a task definition
+      description: Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as INACTIVE. Existing tasks and services that reference an INACTIVE task definition continue to run without disruption. You cannot use an INACTIVE task definition to run new tasks or create new services.
+      tags:
+      - Task Definitions
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeregisterTaskDefinition.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              type: object
+              required:
+              - taskDefinition
+              properties:
+                taskDefinition:
+                  type: string
+                  description: The family and revision (family:revision) or full ARN of the task definition to deregister.
+      responses:
+        '200':
+          description: Task definition deregistered successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskDefinition:
+                    $ref: '#/components/schemas/TaskDefinition'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    LogConfiguration:
+      type: object
+      description: Log configuration for the container. Fargate tasks support the awslogs, splunk, and awsfirelens log drivers.
+      required:
+      - logDriver
+      properties:
+        logDriver:
+          type: string
+          description: The log driver to use for the container. Fargate supports awslogs, splunk, and awsfirelens.
+          enum:
+          - awslogs
+          - splunk
+          - awsfirelens
+        options:
+          type: object
+          description: Configuration options for the log driver. For awslogs, includes awslogs-group, awslogs-region, and awslogs-stream-prefix.
+          additionalProperties:
+            type: string
+        secretOptions:
+          type: array
+          description: Secret log configuration options passed to the log driver.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              valueFrom:
+                type: string
+    EphemeralStorage:
+      type: object
+      description: The amount of ephemeral storage to allocate for the Fargate task. Available on platform version 1.4.0 or later for Linux and 1.0.0 or later for Windows.
+      required:
+      - sizeInGiB
+      properties:
+        sizeInGiB:
+          type: integer
+          description: The total amount of ephemeral storage in GiB.
+          minimum: 21
+          maximum: 200
+    RegisterTaskDefinitionResponse:
+      type: object
+      properties:
+        taskDefinition:
+          $ref: '#/components/schemas/TaskDefinition'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    Volume:
+      type: object
+      description: A data volume used by containers in a task. Fargate tasks support bind mounts and EFS volumes.
+      properties:
+        name:
+          type: string
+          description: The name of the volume, referenced by containers in mountPoints.
+        efsVolumeConfiguration:
+          type: object
+          description: Amazon EFS volume configuration for the task.
+          required:
+          - fileSystemId
+          properties:
+            fileSystemId:
+              type: string
+              description: The Amazon EFS file system ID.
+            rootDirectory:
+              type: string
+              description: The directory within the EFS file system to mount.
+            transitEncryption:
+              type: string
+              description: Whether to enable EFS transit encryption.
+              enum:
+              - ENABLED
+              - DISABLED
+            transitEncryptionPort:
+              type: integer
+              description: The port to use for encrypted transit.
+            authorizationConfig:
+              type: object
+              properties:
+                accessPointId:
+                  type: string
+                  description: The EFS access point ID.
+                iam:
+                  type: string
+                  description: Whether to use the task IAM role for authorization.
+                  enum:
+                  - ENABLED
+                  - DISABLED
+    TaskDefinition:
+      type: object
+      description: A Fargate task definition describes the containers and parameters required to run a Fargate task.
+      properties:
+        taskDefinitionArn:
+          type: string
+          description: The full ARN of the task definition.
+        family:
+          type: string
+          description: The family name for the task definition.
+        revision:
+          type: integer
+          description: The revision of the task definition.
+        status:
+          type: string
+          description: The status of the task definition.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DELETE_IN_PROGRESS
+        containerDefinitions:
+          type: array
+          description: The container definitions for the task.
+          items:
+            $ref: '#/components/schemas/ContainerDefinition'
+        cpu:
+          type: string
+          description: The task-level CPU value in CPU units. Required for Fargate.
+        memory:
+          type: string
+          description: The task-level memory value in MiB. Required for Fargate.
+        networkMode:
+          type: string
+          description: The Docker networking mode. Must be awsvpc for Fargate tasks.
+          enum:
+          - awsvpc
+        requiresCompatibilities:
+          type: array
+          description: The launch type compatibility requirements.
+          items:
+            type: string
+            enum:
+            - FARGATE
+            - EC2
+        executionRoleArn:
+          type: string
+          description: The ARN of the task execution role for pulling images and sending logs.
+        taskRoleArn:
+          type: string
+          description: The IAM role that containers in the task can assume.
+        runtimePlatform:
+          $ref: '#/components/schemas/RuntimePlatform'
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+        volumes:
+          type: array
+          description: The volumes defined for the task.
+          items:
+            $ref: '#/components/schemas/Volume'
+        registeredAt:
+          type: string
+          format: date-time
+          description: The Unix timestamp when the task definition was registered.
+        registeredBy:
+          type: string
+          description: The principal that registered the task definition.
+        compatibilities:
+          type: array
+          description: The launch type compatibilities for the task definition.
+          items:
+            type: string
+    PortMapping:
+      type: object
+      description: A port mapping for a container. For Fargate tasks, the containerPort is the only required field. The hostPort is automatically set to match the containerPort.
+      properties:
+        containerPort:
+          type: integer
+          description: The port number on the container bound to the host port.
+          minimum: 0
+          maximum: 65535
+        hostPort:
+          type: integer
+          description: The port number on the host. For Fargate tasks, this is always the same as the containerPort.
+          minimum: 0
+          maximum: 65535
+        protocol:
+          type: string
+          description: The protocol used for the port mapping.
+          enum:
+          - tcp
+          - udp
+          default: tcp
+        name:
+          type: string
+          description: The name for the port mapping, used for Service Connect.
+        appProtocol:
+          type: string
+          description: The application protocol for the port mapping, used for Service Connect.
+          enum:
+          - http
+          - http2
+          - grpc
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The error type identifier.
+        message:
+          type: string
+          description: A human-readable error message.
+    HealthCheck:
+      type: object
+      description: Container health check configuration. The health check command is run inside the container.
+      required:
+      - command
+      properties:
+        command:
+          type: array
+          description: The command to run to determine container health. Prefix with CMD for shell execution or CMD-SHELL for direct execution.
+          items:
+            type: string
+        interval:
+          type: integer
+          description: The period in seconds between health checks. Default is 30.
+          default: 30
+          minimum: 5
+          maximum: 300
+        timeout:
+          type: integer
+          description: The time in seconds to wait for a health check to succeed. Default is 5.
+          default: 5
+          minimum: 2
+          maximum: 120
+        retries:
+          type: integer
+          description: The number of times to retry a failed health check before the container is considered unhealthy. Default is 3.
+          default: 3
+          minimum: 1
+          maximum: 10
+        startPeriod:
+          type: integer
+          description: The grace period in seconds to allow the container to bootstrap before failed health checks count.
+          default: 0
+          minimum: 0
+          maximum: 300
+    RegisterTaskDefinitionRequest:
+      type: object
+      description: Request to register a Fargate task definition.
+      required:
+      - family
+      - containerDefinitions
+      properties:
+        family:
+          type: string
+          description: The family name for the task definition. Up to 255 characters consisting of letters, numbers, underscores, and hyphens.
+          maxLength: 255
+          pattern: ^[a-zA-Z0-9_-]+$
+        containerDefinitions:
+          type: array
+          description: The container definitions for the task.
+          items:
+            $ref: '#/components/schemas/ContainerDefinition'
+        cpu:
+          type: string
+          description: The task-level CPU value in CPU units. Required for Fargate. Valid values are 256, 512, 1024, 2048, 4096, 8192, and 16384.
+          enum:
+          - '256'
+          - '512'
+          - '1024'
+          - '2048'
+          - '4096'
+          - '8192'
+          - '16384'
+        memory:
+          type: string
+          description: The task-level memory value in MiB. Required for Fargate. The valid values depend on the CPU value specified.
+        networkMode:
+          type: string
+          description: The Docker networking mode. Must be awsvpc for Fargate tasks.
+          enum:
+          - awsvpc
+        requiresCompatibilities:
+          type: array
+          description: The launch type compatibility to validate against. Use FARGATE to ensure the task definition is Fargate-compatible.
+          items:
+            type: string
+            enum:
+            - FARGATE
+            - EC2
+        executionRoleArn:
+          type: string
+          description: The ARN of the task execution role that grants the ECS agent permission to pull images and publish logs.
+        taskRoleArn:
+          type: string
+          description: The IAM role that containers in the task can assume for AWS API access.
+        runtimePlatform:
+          $ref: '#/components/schemas/RuntimePlatform'
+        ephemeralStorage:
+          $ref: '#/components/schemas/EphemeralStorage'
+        volumes:
+          type: array
+          description: The volumes to make available for containers in the task.
+          items:
+            $ref: '#/components/schemas/Volume'
+        tags:
+          type: array
+          description: Tags to apply to the task definition.
+          items:
+            $ref: '#/components/schemas/Tag'
+    ContainerDefinition:
+      type: object
+      description: A container definition describes a container that is part of a task.
+      required:
+      - name
+      - image
+      properties:
+        name:
+          type: string
+          description: The name of the container. Up to 255 letters, numbers, underscores, and hyphens.
+          maxLength: 255
+        image:
+          type: string
+          description: The image used to start the container. Can be an image in a Docker Hub, Amazon ECR, or another repository.
+        cpu:
+          type: integer
+          description: The number of cpu units reserved for the container. For Fargate tasks, the task-level CPU value is used, and this is optional.
+        memory:
+          type: integer
+          description: The amount of memory (in MiB) to allocate to the container. For Fargate tasks, the task-level memory value is used, and this is optional.
+        memoryReservation:
+          type: integer
+          description: The soft limit (in MiB) of memory to reserve for the container.
+        essential:
+          type: boolean
+          description: If true, and the container fails or stops, all other containers in the task are stopped. At least one container must be marked essential in a task definition.
+        portMappings:
+          type: array
+          description: Port mappings for the container. For Fargate tasks with awsvpc network mode, only containerPort is used. The hostPort value is the same as containerPort.
+          items:
+            $ref: '#/components/schemas/PortMapping'
+        environment:
+          type: array
+          description: Environment variables to pass to the container.
+          items:
+            $ref: '#/components/schemas/KeyValuePair'
+        secrets:
+          type: array
+          description: Secrets to pass to the container from AWS Secrets Manager or AWS Systems Manager Parameter Store.
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+                description: The name of the environment variable to set in the container.
+              valueFrom:
+                type: string
+                description: The secret ARN or SSM parameter ARN to expose as an environment variable.
+        logConfiguration:
+          $ref: '#/components/schemas/LogConfiguration'
+        healthCheck:
+          $ref: '#/components/schemas/HealthCheck'
+        command:
+          type: array
+          description: The command passed to the container. Overrides the CMD in the Dockerfile.
+          items:
+            type: string
+        entryPoint:
+          type: array
+          description: The entry point passed to the container. Overrides the ENTRYPOINT in the Dockerfile.
+          items:
+            type: string
+        workingDirectory:
+          type: string
+          description: The working directory to run commands inside the container.
+        user:
+          type: string
+          description: The user to use inside the container (UID or username).
+        readonlyRootFilesystem:
+          type: boolean
+          description: When true, the container is given read-only access to its root filesystem.
+        dependsOn:
+          type: array
+          description: Dependencies defined for container startup and shutdown ordering.
+          items:
+            type: object
+            properties:
+              containerName:
+                type: string
+              condition:
+                type: string
+                enum:
+                - START
+                - COMPLETE
+                - SUCCESS
+                - HEALTHY
+        mountPoints:
+          type: array
+          description: Mount points for data volumes in the container.
+          items:
+            type: object
+            properties:
+              sourceVolume:
+                type: string
+              containerPath:
+                type: string
+              readOnly:
+                type: boolean
+    KeyValuePair:
+      type: object
+      description: A key-value pair representing an environment variable.
+      properties:
+        name:
+          type: string
+          description: The name of the environment variable.
+        value:
+          type: string
+          description: The value of the environment variable.
+    Tag:
+      type: object
+      description: A key-value pair used to tag an Amazon ECS resource.
+      properties:
+        key:
+          type: string
+          description: The tag key. Tag keys are case-sensitive and must be unique.
+          maxLength: 128
+        value:
+          type: string
+          description: The tag value.
+          maxLength: 256
+    RuntimePlatform:
+      type: object
+      description: The operating system and CPU architecture for the Fargate task.
+      properties:
+        cpuArchitecture:
+          type: string
+          description: The CPU architecture. ARM64 is supported for Linux tasks.
+          enum:
+          - X86_64
+          - ARM64
+          default: X86_64
+        operatingSystemFamily:
+          type: string
+          description: The operating system family for the Fargate task.
+          enum:
+          - LINUX
+          - WINDOWS_SERVER_2019_FULL
+          - WINDOWS_SERVER_2019_CORE
+          - WINDOWS_SERVER_2022_FULL
+          - WINDOWS_SERVER_2022_CORE
+          - WINDOWS_SERVER_2025_FULL
+          - WINDOWS_SERVER_2025_CORE
+          default: LINUX
+  parameters:
+    X-Amz-Target:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+      description: The ECS API action target header used for JSON-RPC style routing.
+  responses:
+    ServerError:
+      description: Server error. An internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ClientError:
+      description: Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    aws_sig_v4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests must be signed using AWS access credentials.
+externalDocs:
+  description: AWS Fargate Developer Guide
+  url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html

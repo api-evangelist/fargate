@@ -1,0 +1,356 @@
+openapi: 3.1.0
+info:
+  title: 'AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService API'
+  description: The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.
+  version: '2014-11-13'
+  contact:
+    name: Amazon Web Services
+    url: https://aws.amazon.com/fargate/
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  termsOfService: https://aws.amazon.com/service-terms/
+servers:
+- url: https://ecs.{region}.amazonaws.com
+  description: Amazon ECS regional endpoint
+  variables:
+    region:
+      default: us-east-1
+      description: AWS region
+      enum:
+      - us-east-1
+      - us-east-2
+      - us-west-1
+      - us-west-2
+      - eu-west-1
+      - eu-west-2
+      - eu-west-3
+      - eu-central-1
+      - eu-north-1
+      - ap-southeast-1
+      - ap-southeast-2
+      - ap-northeast-1
+      - ap-northeast-2
+      - ap-south-1
+      - sa-east-1
+      - ca-central-1
+security:
+- aws_sig_v4: []
+tags:
+- name: '#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService'
+paths:
+  /#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService:
+    post:
+      operationId: updateService
+      summary: AWS Fargate Update a Fargate service
+      description: Updates the specified service. You can update the task definition, desired count, deployment configuration, network configuration, and platform version for Fargate services. When you update a service, a new deployment is started that replaces existing tasks with tasks from the new configuration according to the deployment strategy.
+      tags:
+      - '#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService'
+      externalDocs:
+        url: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_UpdateService.html
+      parameters:
+      - $ref: '#/components/parameters/X-Amz-Target'
+      requestBody:
+        required: true
+        content:
+          application/x-amz-json-1.1:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceRequest'
+      responses:
+        '200':
+          description: Service updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  service:
+                    $ref: '#/components/schemas/Service'
+        '400':
+          $ref: '#/components/responses/ClientError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+components:
+  schemas:
+    AwsVpcConfiguration:
+      type: object
+      description: The VPC networking configuration for Fargate tasks, which always use the awsvpc network mode.
+      required:
+      - subnets
+      properties:
+        subnets:
+          type: array
+          description: The IDs of the subnets associated with the task or service. All specified subnets must be in the same VPC.
+          items:
+            type: string
+        securityGroups:
+          type: array
+          description: The IDs of the security groups associated with the task or service. If no security group is specified, the default security group for the VPC is used.
+          items:
+            type: string
+          maxItems: 5
+        assignPublicIp:
+          type: string
+          description: Whether the task's elastic network interface receives a public IP address. A value of ENABLED is required when using public subnets so Fargate tasks can pull container images.
+          enum:
+          - ENABLED
+          - DISABLED
+    NetworkConfiguration:
+      type: object
+      description: The network configuration for a task or service. Required for Fargate tasks and services.
+      properties:
+        awsvpcConfiguration:
+          $ref: '#/components/schemas/AwsVpcConfiguration'
+    DeploymentConfiguration:
+      type: object
+      description: The deployment configuration for a service, controlling how updates are rolled out.
+      properties:
+        maximumPercent:
+          type: integer
+          description: The upper limit of the number of tasks allowed during a deployment as a percentage of the desired count. Default is 200%.
+          default: 200
+        minimumHealthyPercent:
+          type: integer
+          description: The lower limit of the number of running tasks during a deployment as a percentage of the desired count. Default is 100%.
+          default: 100
+        deploymentCircuitBreaker:
+          type: object
+          description: The deployment circuit breaker to automatically roll back unhealthy deployments.
+          properties:
+            enable:
+              type: boolean
+              description: Whether to enable the deployment circuit breaker.
+            rollback:
+              type: boolean
+              description: Whether to enable automatic rollback on deployment failure.
+    Service:
+      type: object
+      description: Details of an ECS service running Fargate tasks.
+      properties:
+        serviceArn:
+          type: string
+          description: The ARN of the service.
+        serviceName:
+          type: string
+          description: The name of the service.
+        clusterArn:
+          type: string
+          description: The ARN of the cluster that hosts the service.
+        taskDefinition:
+          type: string
+          description: The task definition ARN used by the service.
+        status:
+          type: string
+          description: The status of the service.
+        desiredCount:
+          type: integer
+          description: The desired number of tasks for the service.
+        runningCount:
+          type: integer
+          description: The number of tasks currently running.
+        pendingCount:
+          type: integer
+          description: The number of tasks in a pending state.
+        launchType:
+          type: string
+          description: The infrastructure the tasks run on.
+          enum:
+          - FARGATE
+          - EC2
+          - EXTERNAL
+        platformVersion:
+          type: string
+          description: The Fargate platform version the tasks run on.
+        platformFamily:
+          type: string
+          description: The operating system the tasks run on.
+        schedulingStrategy:
+          type: string
+          description: The scheduling strategy for the service.
+          enum:
+          - REPLICA
+          - DAEMON
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        deployments:
+          type: array
+          description: The current deployments for the service.
+          items:
+            $ref: '#/components/schemas/Deployment'
+        loadBalancers:
+          type: array
+          description: The load balancers associated with the service. Fargate supports Application Load Balancers and Network Load Balancers only.
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+        serviceRegistries:
+          type: array
+          description: The service discovery registries for the service.
+          items:
+            type: object
+            properties:
+              registryArn:
+                type: string
+              port:
+                type: integer
+              containerName:
+                type: string
+              containerPort:
+                type: integer
+        enableExecuteCommand:
+          type: boolean
+          description: Whether ECS Exec is enabled for the service.
+        createdAt:
+          type: string
+          format: date-time
+          description: The timestamp when the service was created.
+        createdBy:
+          type: string
+          description: The principal that created the service.
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Tag'
+    LoadBalancer:
+      type: object
+      description: The load balancer configuration for a service. Fargate services support Application Load Balancers (ALB) and Network Load Balancers (NLB) with IP target type.
+      properties:
+        targetGroupArn:
+          type: string
+          description: The ARN of the Elastic Load Balancing target group.
+        containerName:
+          type: string
+          description: The name of the container to route traffic to.
+        containerPort:
+          type: integer
+          description: The port on the container to route traffic to.
+    UpdateServiceRequest:
+      type: object
+      description: Request to update a Fargate service.
+      required:
+      - service
+      properties:
+        cluster:
+          type: string
+          description: The short name or full ARN of the cluster that hosts the service.
+        service:
+          type: string
+          description: The name or ARN of the service to update.
+        taskDefinition:
+          type: string
+          description: The family and revision or full ARN of the new task definition.
+        desiredCount:
+          type: integer
+          description: The new desired count for the service.
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+        platformVersion:
+          type: string
+          description: The new Fargate platform version for the service.
+        deploymentConfiguration:
+          $ref: '#/components/schemas/DeploymentConfiguration'
+        enableExecuteCommand:
+          type: boolean
+          description: Whether to enable ECS Exec for the service.
+        forceNewDeployment:
+          type: boolean
+          description: Whether to force a new deployment of the service even if the service configuration has not changed.
+        loadBalancers:
+          type: array
+          items:
+            $ref: '#/components/schemas/LoadBalancer'
+    ErrorResponse:
+      type: object
+      properties:
+        __type:
+          type: string
+          description: The error type identifier.
+        message:
+          type: string
+          description: A human-readable error message.
+    Tag:
+      type: object
+      description: A key-value pair used to tag an Amazon ECS resource.
+      properties:
+        key:
+          type: string
+          description: The tag key. Tag keys are case-sensitive and must be unique.
+          maxLength: 128
+        value:
+          type: string
+          description: The tag value.
+          maxLength: 256
+    Deployment:
+      type: object
+      description: Details of a service deployment.
+      properties:
+        id:
+          type: string
+          description: The deployment ID.
+        status:
+          type: string
+          description: The deployment status.
+        taskDefinition:
+          type: string
+          description: The task definition ARN for the deployment.
+        desiredCount:
+          type: integer
+          description: The desired number of tasks in the deployment.
+        runningCount:
+          type: integer
+          description: The number of running tasks in the deployment.
+        pendingCount:
+          type: integer
+          description: The number of pending tasks in the deployment.
+        launchType:
+          type: string
+          description: The launch type used by the deployment.
+        platformVersion:
+          type: string
+          description: The Fargate platform version used by the deployment.
+        rolloutState:
+          type: string
+          description: The rollout state of the deployment.
+          enum:
+          - COMPLETED
+          - FAILED
+          - IN_PROGRESS
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        networkConfiguration:
+          $ref: '#/components/schemas/NetworkConfiguration'
+  parameters:
+    X-Amz-Target:
+      name: X-Amz-Target
+      in: header
+      required: true
+      schema:
+        type: string
+      description: The ECS API action target header used for JSON-RPC style routing.
+  responses:
+    ServerError:
+      description: Server error. An internal service error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    ClientError:
+      description: Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    aws_sig_v4:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: AWS Signature Version 4 authentication. Requests must be signed using AWS access credentials.
+externalDocs:
+  description: AWS Fargate Developer Guide
+  url: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS_Fargate.html
