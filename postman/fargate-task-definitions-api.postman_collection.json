@@ -1,0 +1,932 @@
+{
+  "info": {
+    "_postman_id": "1abfdf7f-4b73-4b44-9b7f-1afa91478d83",
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters Task Definitions API",
+    "description": "The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:31.000Z",
+    "updatedAt": "2026-07-28T01:36:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1abfdf7f-4b73-4b44-9b7f-1afa91478d83"
+  },
+  "item": [
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+      "item": [
+        {
+          "name": "AWS Fargate Register a Fargate task definition",
+          "id": "5f354022-cd99-482d-87e5-95defdbf131c",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"family\": \"x\",\n  \"containerDefinitions\": [\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"awslogs\",\n        \"options\": {\n          \"non87\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"START\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"grpc\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"splunk\",\n        \"options\": {\n          \"anim574\": \"<string>\",\n          \"cupidatat312\": \"<string>\",\n          \"Duis_746\": \"<string>\",\n          \"aliquip0\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"cpu\": \"1024\",\n  \"memory\": \"<string>\",\n  \"networkMode\": \"awsvpc\",\n  \"requiresCompatibilities\": [\n    \"EC2\",\n    \"FARGATE\"\n  ],\n  \"executionRoleArn\": \"<string>\",\n  \"taskRoleArn\": \"<string>\",\n  \"runtimePlatform\": {\n    \"cpuArchitecture\": \"X86_64\",\n    \"operatingSystemFamily\": \"LINUX\"\n  },\n  \"ephemeralStorage\": {\n    \"sizeInGiB\": \"<integer>\"\n  },\n  \"volumes\": [\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition"
+            },
+            "description": "Registers a new task definition from the supplied family and container definitions. For Fargate tasks, the networkMode must be awsvpc, and task-level cpu and memory values are required. Use the requiresCompatibilities parameter with FARGATE to validate that all parameters meet Fargate requirements. The task definition is used to run tasks directly or as part of a service."
+          },
+          "response": [
+            {
+              "id": "f5ab3beb-0a34-4e04-a946-bc46c04cede5",
+              "name": "Task definition registered successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"family\": \"x\",\n  \"containerDefinitions\": [\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"awslogs\",\n        \"options\": {\n          \"non87\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"START\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"grpc\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"splunk\",\n        \"options\": {\n          \"anim574\": \"<string>\",\n          \"cupidatat312\": \"<string>\",\n          \"Duis_746\": \"<string>\",\n          \"aliquip0\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"cpu\": \"1024\",\n  \"memory\": \"<string>\",\n  \"networkMode\": \"awsvpc\",\n  \"requiresCompatibilities\": [\n    \"EC2\",\n    \"FARGATE\"\n  ],\n  \"executionRoleArn\": \"<string>\",\n  \"taskRoleArn\": \"<string>\",\n  \"runtimePlatform\": {\n    \"cpuArchitecture\": \"X86_64\",\n    \"operatingSystemFamily\": \"LINUX\"\n  },\n  \"ephemeralStorage\": {\n    \"sizeInGiB\": \"<integer>\"\n  },\n  \"volumes\": [\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"taskDefinition\": {\n    \"taskDefinitionArn\": \"<string>\",\n    \"family\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"status\": \"ACTIVE\",\n    \"containerDefinitions\": [\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http2\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http2\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awsfirelens\",\n          \"options\": {\n            \"esse_b91\": \"<string>\",\n            \"occaecat247\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"START\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"SUCCESS\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awslogs\",\n          \"options\": {\n            \"commodof7\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"SUCCESS\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"START\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      }\n    ],\n    \"cpu\": \"<string>\",\n    \"memory\": \"<string>\",\n    \"networkMode\": \"awsvpc\",\n    \"requiresCompatibilities\": [\n      \"EC2\",\n      \"FARGATE\"\n    ],\n    \"executionRoleArn\": \"<string>\",\n    \"taskRoleArn\": \"<string>\",\n    \"runtimePlatform\": {\n      \"cpuArchitecture\": \"X86_64\",\n      \"operatingSystemFamily\": \"LINUX\"\n    },\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": \"<integer>\"\n    },\n    \"volumes\": [\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"ENABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"ENABLED\"\n          }\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"DISABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"ENABLED\"\n          }\n        }\n      }\n    ],\n    \"registeredAt\": \"<dateTime>\",\n    \"registeredBy\": \"<string>\",\n    \"compatibilities\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-f5ab3beb-0a34-4e04-a946-bc46c04cede5"
+            },
+            {
+              "id": "7b2392d5-9fb6-44dd-b1fc-9993d1c90060",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"family\": \"x\",\n  \"containerDefinitions\": [\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"awslogs\",\n        \"options\": {\n          \"non87\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"START\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"grpc\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"splunk\",\n        \"options\": {\n          \"anim574\": \"<string>\",\n          \"cupidatat312\": \"<string>\",\n          \"Duis_746\": \"<string>\",\n          \"aliquip0\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"cpu\": \"1024\",\n  \"memory\": \"<string>\",\n  \"networkMode\": \"awsvpc\",\n  \"requiresCompatibilities\": [\n    \"EC2\",\n    \"FARGATE\"\n  ],\n  \"executionRoleArn\": \"<string>\",\n  \"taskRoleArn\": \"<string>\",\n  \"runtimePlatform\": {\n    \"cpuArchitecture\": \"X86_64\",\n    \"operatingSystemFamily\": \"LINUX\"\n  },\n  \"ephemeralStorage\": {\n    \"sizeInGiB\": \"<integer>\"\n  },\n  \"volumes\": [\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-7b2392d5-9fb6-44dd-b1fc-9993d1c90060"
+            },
+            {
+              "id": "26095218-4831-467b-b756-0ec8a2923f1a",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"family\": \"x\",\n  \"containerDefinitions\": [\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"awslogs\",\n        \"options\": {\n          \"non87\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"START\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"image\": \"<string>\",\n      \"cpu\": \"<integer>\",\n      \"memory\": \"<integer>\",\n      \"memoryReservation\": \"<integer>\",\n      \"essential\": \"<boolean>\",\n      \"portMappings\": [\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"http2\"\n        },\n        {\n          \"containerPort\": \"<integer>\",\n          \"hostPort\": \"<integer>\",\n          \"protocol\": \"tcp\",\n          \"name\": \"<string>\",\n          \"appProtocol\": \"grpc\"\n        }\n      ],\n      \"environment\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"secrets\": [\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"valueFrom\": \"<string>\"\n        }\n      ],\n      \"logConfiguration\": {\n        \"logDriver\": \"splunk\",\n        \"options\": {\n          \"anim574\": \"<string>\",\n          \"cupidatat312\": \"<string>\",\n          \"Duis_746\": \"<string>\",\n          \"aliquip0\": \"<string>\"\n        },\n        \"secretOptions\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ]\n      },\n      \"healthCheck\": {\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"interval\": 30,\n        \"timeout\": 5,\n        \"retries\": 3,\n        \"startPeriod\": 0\n      },\n      \"command\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"entryPoint\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"workingDirectory\": \"<string>\",\n      \"user\": \"<string>\",\n      \"readonlyRootFilesystem\": \"<boolean>\",\n      \"dependsOn\": [\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        },\n        {\n          \"containerName\": \"<string>\",\n          \"condition\": \"SUCCESS\"\n        }\n      ],\n      \"mountPoints\": [\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        },\n        {\n          \"sourceVolume\": \"<string>\",\n          \"containerPath\": \"<string>\",\n          \"readOnly\": \"<boolean>\"\n        }\n      ]\n    }\n  ],\n  \"cpu\": \"1024\",\n  \"memory\": \"<string>\",\n  \"networkMode\": \"awsvpc\",\n  \"requiresCompatibilities\": [\n    \"EC2\",\n    \"FARGATE\"\n  ],\n  \"executionRoleArn\": \"<string>\",\n  \"taskRoleArn\": \"<string>\",\n  \"runtimePlatform\": {\n    \"cpuArchitecture\": \"X86_64\",\n    \"operatingSystemFamily\": \"LINUX\"\n  },\n  \"ephemeralStorage\": {\n    \"sizeInGiB\": \"<integer>\"\n  },\n  \"volumes\": [\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"efsVolumeConfiguration\": {\n        \"fileSystemId\": \"<string>\",\n        \"rootDirectory\": \"<string>\",\n        \"transitEncryption\": \"ENABLED\",\n        \"transitEncryptionPort\": \"<integer>\",\n        \"authorizationConfig\": {\n          \"accessPointId\": \"<string>\",\n          \"iam\": \"ENABLED\"\n        }\n      }\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-26095218-4831-467b-b756-0ec8a2923f1a"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:32.000Z",
+          "updatedAt": "2026-07-28T01:36:32.000Z",
+          "uid": "35240-5f354022-cd99-482d-87e5-95defdbf131c"
+        }
+      ],
+      "id": "6d92c5e8-ea55-4d05-99bd-db18993d3f14",
+      "createdAt": "2026-07-28T01:36:32.000Z",
+      "updatedAt": "2026-07-28T01:36:32.000Z",
+      "uid": "35240-6d92c5e8-ea55-4d05-99bd-db18993d3f14"
+    },
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+      "item": [
+        {
+          "name": "AWS Fargate Describe a task definition",
+          "id": "5a464e5b-8b42-41cf-9f64-ab2e8e518888",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"include\": [\n    \"TAGS\",\n    \"TAGS\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition"
+            },
+            "description": "Describes a task definition. You can specify a family and revision to find a specific task definition, or you can provide the family name alone to get the latest ACTIVE revision in that family. This is useful for inspecting the Fargate CPU, memory, and networking configuration of a registered task definition."
+          },
+          "response": [
+            {
+              "id": "157dcda6-c5d7-48f1-a76b-466f246b1fd3",
+              "name": "Task definition described successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"include\": [\n    \"TAGS\",\n    \"TAGS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"taskDefinition\": {\n    \"taskDefinitionArn\": \"<string>\",\n    \"family\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"status\": \"ACTIVE\",\n    \"containerDefinitions\": [\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http2\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http2\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awsfirelens\",\n          \"options\": {\n            \"esse_b91\": \"<string>\",\n            \"occaecat247\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"START\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"SUCCESS\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awslogs\",\n          \"options\": {\n            \"commodof7\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"SUCCESS\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"START\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      }\n    ],\n    \"cpu\": \"<string>\",\n    \"memory\": \"<string>\",\n    \"networkMode\": \"awsvpc\",\n    \"requiresCompatibilities\": [\n      \"EC2\",\n      \"FARGATE\"\n    ],\n    \"executionRoleArn\": \"<string>\",\n    \"taskRoleArn\": \"<string>\",\n    \"runtimePlatform\": {\n      \"cpuArchitecture\": \"X86_64\",\n      \"operatingSystemFamily\": \"LINUX\"\n    },\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": \"<integer>\"\n    },\n    \"volumes\": [\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"ENABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"ENABLED\"\n          }\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"DISABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"ENABLED\"\n          }\n        }\n      }\n    ],\n    \"registeredAt\": \"<dateTime>\",\n    \"registeredBy\": \"<string>\",\n    \"compatibilities\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-157dcda6-c5d7-48f1-a76b-466f246b1fd3"
+            },
+            {
+              "id": "d72720a3-e4c8-44ac-90d0-3706488f689b",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"include\": [\n    \"TAGS\",\n    \"TAGS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-d72720a3-e4c8-44ac-90d0-3706488f689b"
+            },
+            {
+              "id": "260bab91-378c-4491-82f3-dae3fab126c8",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"include\": [\n    \"TAGS\",\n    \"TAGS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-260bab91-378c-4491-82f3-dae3fab126c8"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:32.000Z",
+          "updatedAt": "2026-07-28T01:36:32.000Z",
+          "uid": "35240-5a464e5b-8b42-41cf-9f64-ab2e8e518888"
+        }
+      ],
+      "id": "432852f5-4638-46ec-9c40-88faba7e3b52",
+      "createdAt": "2026-07-28T01:36:32.000Z",
+      "updatedAt": "2026-07-28T01:36:32.000Z",
+      "uid": "35240-432852f5-4638-46ec-9c40-88faba7e3b52"
+    },
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+      "item": [
+        {
+          "name": "AWS Fargate List task definitions",
+          "id": "ebfa95ab-4ecf-452c-a51b-af3cc2dbf946",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"familyPrefix\": \"<string>\",\n  \"status\": \"INACTIVE\",\n  \"sort\": \"DESC\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions"
+            },
+            "description": "Returns a list of task definitions that are registered to your account. You can filter the results by family name to retrieve all revisions of a particular task definition family. Use the status filter to list only ACTIVE or INACTIVE task definitions."
+          },
+          "response": [
+            {
+              "id": "67df1402-51f0-4fb2-bb27-dcff82ce906a",
+              "name": "List of task definition ARNs",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"familyPrefix\": \"<string>\",\n  \"status\": \"INACTIVE\",\n  \"sort\": \"DESC\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"taskDefinitionArns\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"nextToken\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-67df1402-51f0-4fb2-bb27-dcff82ce906a"
+            },
+            {
+              "id": "11987b71-953f-47b1-b19f-644760963e22",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"familyPrefix\": \"<string>\",\n  \"status\": \"INACTIVE\",\n  \"sort\": \"DESC\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-11987b71-953f-47b1-b19f-644760963e22"
+            },
+            {
+              "id": "e4ff2358-c182-4925-b479-175662022ee5",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"familyPrefix\": \"<string>\",\n  \"status\": \"INACTIVE\",\n  \"sort\": \"DESC\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-e4ff2358-c182-4925-b479-175662022ee5"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:32.000Z",
+          "updatedAt": "2026-07-28T01:36:32.000Z",
+          "uid": "35240-ebfa95ab-4ecf-452c-a51b-af3cc2dbf946"
+        }
+      ],
+      "id": "ce344c04-63c4-410c-9451-fd1cc231d1bc",
+      "createdAt": "2026-07-28T01:36:32.000Z",
+      "updatedAt": "2026-07-28T01:36:32.000Z",
+      "uid": "35240-ce344c04-63c4-410c-9451-fd1cc231d1bc"
+    },
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+      "item": [
+        {
+          "name": "AWS Fargate Deregister a task definition",
+          "id": "e9cd7789-5393-4390-9651-edc75148aadd",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskDefinition\": \"<string>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition"
+            },
+            "description": "Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as INACTIVE. Existing tasks and services that reference an INACTIVE task definition continue to run without disruption. You cannot use an INACTIVE task definition to run new tasks or create new services."
+          },
+          "response": [
+            {
+              "id": "0c564d3d-2c46-42c6-bb99-aa7972dac16e",
+              "name": "Task definition deregistered successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"taskDefinition\": {\n    \"taskDefinitionArn\": \"<string>\",\n    \"family\": \"<string>\",\n    \"revision\": \"<integer>\",\n    \"status\": \"INACTIVE\",\n    \"containerDefinitions\": [\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"grpc\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awslogs\",\n          \"options\": {\n            \"fugiat_06\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"COMPLETE\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"HEALTHY\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"image\": \"<string>\",\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\",\n        \"essential\": \"<boolean>\",\n        \"portMappings\": [\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"grpc\"\n          },\n          {\n            \"containerPort\": \"<integer>\",\n            \"hostPort\": \"<integer>\",\n            \"protocol\": \"tcp\",\n            \"name\": \"<string>\",\n            \"appProtocol\": \"http2\"\n          }\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"secrets\": [\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"valueFrom\": \"<string>\"\n          }\n        ],\n        \"logConfiguration\": {\n          \"logDriver\": \"awslogs\",\n          \"options\": {\n            \"deserunt_34c\": \"<string>\",\n            \"reprehenderit78\": \"<string>\"\n          },\n          \"secretOptions\": [\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            },\n            {\n              \"name\": \"<string>\",\n              \"valueFrom\": \"<string>\"\n            }\n          ]\n        },\n        \"healthCheck\": {\n          \"command\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"interval\": 30,\n          \"timeout\": 5,\n          \"retries\": 3,\n          \"startPeriod\": 0\n        },\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"entryPoint\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"workingDirectory\": \"<string>\",\n        \"user\": \"<string>\",\n        \"readonlyRootFilesystem\": \"<boolean>\",\n        \"dependsOn\": [\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"START\"\n          },\n          {\n            \"containerName\": \"<string>\",\n            \"condition\": \"HEALTHY\"\n          }\n        ],\n        \"mountPoints\": [\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          },\n          {\n            \"sourceVolume\": \"<string>\",\n            \"containerPath\": \"<string>\",\n            \"readOnly\": \"<boolean>\"\n          }\n        ]\n      }\n    ],\n    \"cpu\": \"<string>\",\n    \"memory\": \"<string>\",\n    \"networkMode\": \"awsvpc\",\n    \"requiresCompatibilities\": [\n      \"EC2\",\n      \"EC2\"\n    ],\n    \"executionRoleArn\": \"<string>\",\n    \"taskRoleArn\": \"<string>\",\n    \"runtimePlatform\": {\n      \"cpuArchitecture\": \"X86_64\",\n      \"operatingSystemFamily\": \"LINUX\"\n    },\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": \"<integer>\"\n    },\n    \"volumes\": [\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"DISABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"DISABLED\"\n          }\n        }\n      },\n      {\n        \"name\": \"<string>\",\n        \"efsVolumeConfiguration\": {\n          \"fileSystemId\": \"<string>\",\n          \"rootDirectory\": \"<string>\",\n          \"transitEncryption\": \"DISABLED\",\n          \"transitEncryptionPort\": \"<integer>\",\n          \"authorizationConfig\": {\n            \"accessPointId\": \"<string>\",\n            \"iam\": \"DISABLED\"\n          }\n        }\n      }\n    ],\n    \"registeredAt\": \"<dateTime>\",\n    \"registeredBy\": \"<string>\",\n    \"compatibilities\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-0c564d3d-2c46-42c6-bb99-aa7972dac16e"
+            },
+            {
+              "id": "4f693f54-7958-463e-a519-ad6020d67527",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-4f693f54-7958-463e-a519-ad6020d67527"
+            },
+            {
+              "id": "a9ed0f7f-badf-4d23-b291-08d055d38e5c",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:32.000Z",
+              "updatedAt": "2026-07-28T01:36:32.000Z",
+              "uid": "35240-a9ed0f7f-badf-4d23-b291-08d055d38e5c"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:32.000Z",
+          "updatedAt": "2026-07-28T01:36:32.000Z",
+          "uid": "35240-e9cd7789-5393-4390-9651-edc75148aadd"
+        }
+      ],
+      "id": "e5ca9cb8-a3c5-465b-a01e-6a21c0fcc94c",
+      "createdAt": "2026-07-28T01:36:32.000Z",
+      "updatedAt": "2026-07-28T01:36:32.000Z",
+      "uid": "35240-e5ca9cb8-a3c5-465b-a01e-6a21c0fcc94c"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://ecs.{{region}}.amazonaws.com"
+    }
+  ]
+}

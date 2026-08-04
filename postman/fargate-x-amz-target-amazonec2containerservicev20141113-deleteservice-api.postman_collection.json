@@ -1,0 +1,266 @@
+{
+  "info": {
+    "_postman_id": "ce09b479-d1f0-410c-9752-57e89d5d6997",
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.DeleteService API",
+    "description": "The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:34.000Z",
+    "updatedAt": "2026-07-28T01:36:34.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-ce09b479-d1f0-410c-9752-57e89d5d6997"
+  },
+  "item": [
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+      "item": [
+        {
+          "name": "AWS Fargate Delete a service",
+          "id": "1498a2f9-72d9-4d27-a9a5-4c10b8c33f02",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"force\": \"<boolean>\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService"
+            },
+            "description": "Deletes the specified service within a cluster. You can delete a service if you have no running tasks in it and the desired count is zero. If the service uses a load balancer, the load balancer configuration is removed. If the service was created using a Fargate launch type, the tasks are stopped."
+          },
+          "response": [
+            {
+              "id": "71d678a2-edb9-4613-bec9-55de8d211f01",
+              "name": "Service deleted successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"force\": \"<boolean>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"service\": {\n    \"serviceArn\": \"<string>\",\n    \"serviceName\": \"<string>\",\n    \"clusterArn\": \"<string>\",\n    \"taskDefinition\": \"<string>\",\n    \"status\": \"<string>\",\n    \"desiredCount\": \"<integer>\",\n    \"runningCount\": \"<integer>\",\n    \"pendingCount\": \"<integer>\",\n    \"launchType\": \"EC2\",\n    \"platformVersion\": \"<string>\",\n    \"platformFamily\": \"<string>\",\n    \"schedulingStrategy\": \"DAEMON\",\n    \"networkConfiguration\": {\n      \"awsvpcConfiguration\": {\n        \"subnets\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"securityGroups\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"assignPublicIp\": \"DISABLED\"\n      }\n    },\n    \"deploymentConfiguration\": {\n      \"maximumPercent\": 200,\n      \"minimumHealthyPercent\": 100,\n      \"deploymentCircuitBreaker\": {\n        \"enable\": \"<boolean>\",\n        \"rollback\": \"<boolean>\"\n      }\n    },\n    \"deployments\": [\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"taskDefinition\": \"<string>\",\n        \"desiredCount\": \"<integer>\",\n        \"runningCount\": \"<integer>\",\n        \"pendingCount\": \"<integer>\",\n        \"launchType\": \"<string>\",\n        \"platformVersion\": \"<string>\",\n        \"rolloutState\": \"FAILED\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"networkConfiguration\": {\n          \"awsvpcConfiguration\": {\n            \"subnets\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"securityGroups\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"assignPublicIp\": \"DISABLED\"\n          }\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"status\": \"<string>\",\n        \"taskDefinition\": \"<string>\",\n        \"desiredCount\": \"<integer>\",\n        \"runningCount\": \"<integer>\",\n        \"pendingCount\": \"<integer>\",\n        \"launchType\": \"<string>\",\n        \"platformVersion\": \"<string>\",\n        \"rolloutState\": \"FAILED\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\",\n        \"networkConfiguration\": {\n          \"awsvpcConfiguration\": {\n            \"subnets\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"securityGroups\": [\n              \"<string>\",\n              \"<string>\"\n            ],\n            \"assignPublicIp\": \"DISABLED\"\n          }\n        }\n      }\n    ],\n    \"loadBalancers\": [\n      {\n        \"targetGroupArn\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"containerPort\": \"<integer>\"\n      },\n      {\n        \"targetGroupArn\": \"<string>\",\n        \"containerName\": \"<string>\",\n        \"containerPort\": \"<integer>\"\n      }\n    ],\n    \"serviceRegistries\": [\n      {\n        \"registryArn\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"containerName\": \"<string>\",\n        \"containerPort\": \"<integer>\"\n      },\n      {\n        \"registryArn\": \"<string>\",\n        \"port\": \"<integer>\",\n        \"containerName\": \"<string>\",\n        \"containerPort\": \"<integer>\"\n      }\n    ],\n    \"enableExecuteCommand\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"createdBy\": \"<string>\",\n    \"tags\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:36:35.000Z",
+              "updatedAt": "2026-07-28T01:36:35.000Z",
+              "uid": "35240-71d678a2-edb9-4613-bec9-55de8d211f01"
+            },
+            {
+              "id": "35fc7739-4d85-490b-afdf-a7ae1ae6ec19",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"force\": \"<boolean>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:35.000Z",
+              "updatedAt": "2026-07-28T01:36:35.000Z",
+              "uid": "35240-35fc7739-4d85-490b-afdf-a7ae1ae6ec19"
+            },
+            {
+              "id": "74512561-3659-41b2-bf49-c9090fc33aac",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"force\": \"<boolean>\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:35.000Z",
+              "updatedAt": "2026-07-28T01:36:35.000Z",
+              "uid": "35240-74512561-3659-41b2-bf49-c9090fc33aac"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:35.000Z",
+          "updatedAt": "2026-07-28T01:36:35.000Z",
+          "uid": "35240-1498a2f9-72d9-4d27-a9a5-4c10b8c33f02"
+        }
+      ],
+      "id": "9dd934b7-34e2-4c3a-bf09-c9081f99db31",
+      "createdAt": "2026-07-28T01:36:35.000Z",
+      "updatedAt": "2026-07-28T01:36:35.000Z",
+      "uid": "35240-9dd934b7-34e2-4c3a-bf09-c9081f99db31"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://ecs.{{region}}.amazonaws.com"
+    }
+  ]
+}

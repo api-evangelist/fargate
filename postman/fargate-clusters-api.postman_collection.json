@@ -1,0 +1,488 @@
+{
+  "info": {
+    "_postman_id": "11f3f756-b490-4ede-ad0b-c626f300c481",
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters API",
+    "description": "The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.\n\nContact Support:\n Name: Amazon Web Services",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:36:17.000Z",
+    "updatedAt": "2026-07-28T01:36:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-11f3f756-b490-4ede-ad0b-c626f300c481"
+  },
+  "item": [
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+      "item": [
+        {
+          "name": "AWS Fargate Create an ECS cluster",
+          "id": "6d18d5ca-a727-4122-8831-28186b9684e0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clusterName\": \"<string>\",\n  \"capacityProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultCapacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    },\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    }\n  ],\n  \"settings\": [\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    },\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster"
+            },
+            "description": "Creates a new Amazon ECS cluster. By default, your account receives a default cluster when you launch your first container instance. You can create additional clusters to group Fargate tasks and services. A cluster can be configured with capacity providers including FARGATE and FARGATE_SPOT for serverless compute."
+          },
+          "response": [
+            {
+              "id": "524965f1-4408-496b-9193-5cd7f7e56886",
+              "name": "Cluster created successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterName\": \"<string>\",\n  \"capacityProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultCapacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    },\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    }\n  ],\n  \"settings\": [\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    },\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"cluster\": {\n    \"clusterArn\": \"<string>\",\n    \"clusterName\": \"<string>\",\n    \"status\": \"<string>\",\n    \"capacityProviders\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"defaultCapacityProviderStrategy\": [\n      {\n        \"capacityProvider\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"base\": \"<integer>\"\n      },\n      {\n        \"capacityProvider\": \"<string>\",\n        \"weight\": \"<integer>\",\n        \"base\": \"<integer>\"\n      }\n    ],\n    \"registeredContainerInstancesCount\": \"<integer>\",\n    \"runningTasksCount\": \"<integer>\",\n    \"pendingTasksCount\": \"<integer>\",\n    \"activeServicesCount\": \"<integer>\",\n    \"settings\": [\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"tags\": [\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-524965f1-4408-496b-9193-5cd7f7e56886"
+            },
+            {
+              "id": "5bf50469-0928-46a4-bc3b-b6c954534479",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterName\": \"<string>\",\n  \"capacityProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultCapacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    },\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    }\n  ],\n  \"settings\": [\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    },\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-5bf50469-0928-46a4-bc3b-b6c954534479"
+            },
+            {
+              "id": "9c186ad2-3f16-4cba-9e73-bd8c9fc496c0",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusterName\": \"<string>\",\n  \"capacityProviders\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"defaultCapacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    },\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    }\n  ],\n  \"settings\": [\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    },\n    {\n      \"name\": \"containerInsights\",\n      \"value\": \"disabled\"\n    }\n  ],\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.CreateCluster"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-9c186ad2-3f16-4cba-9e73-bd8c9fc496c0"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:17.000Z",
+          "updatedAt": "2026-07-28T01:36:17.000Z",
+          "uid": "35240-6d18d5ca-a727-4122-8831-28186b9684e0"
+        }
+      ],
+      "id": "e918459b-c73b-48c6-a931-ff2e42e6b6f1",
+      "createdAt": "2026-07-28T01:36:17.000Z",
+      "updatedAt": "2026-07-28T01:36:17.000Z",
+      "uid": "35240-e918459b-c73b-48c6-a931-ff2e42e6b6f1"
+    },
+    {
+      "name": "#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+      "item": [
+        {
+          "name": "AWS Fargate Describe one or more clusters",
+          "id": "b98f3a9a-5e16-420a-8474-0de7c210f1fe",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include\": [\n    \"STATISTICS\",\n    \"ATTACHMENTS\"\n  ]\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters"
+            },
+            "description": "Describes one or more of your clusters. Returns information about the cluster including its status, capacity providers, default capacity provider strategy, active services count, running tasks count, and configuration settings."
+          },
+          "response": [
+            {
+              "id": "eb573e33-6039-4794-9cb0-0739cac9cb4d",
+              "name": "Clusters described successfully",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include\": [\n    \"STATISTICS\",\n    \"ATTACHMENTS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"clusters\": [\n    {\n      \"clusterArn\": \"<string>\",\n      \"clusterName\": \"<string>\",\n      \"status\": \"<string>\",\n      \"capacityProviders\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"defaultCapacityProviderStrategy\": [\n        {\n          \"capacityProvider\": \"<string>\",\n          \"weight\": \"<integer>\",\n          \"base\": \"<integer>\"\n        },\n        {\n          \"capacityProvider\": \"<string>\",\n          \"weight\": \"<integer>\",\n          \"base\": \"<integer>\"\n        }\n      ],\n      \"registeredContainerInstancesCount\": \"<integer>\",\n      \"runningTasksCount\": \"<integer>\",\n      \"pendingTasksCount\": \"<integer>\",\n      \"activeServicesCount\": \"<integer>\",\n      \"settings\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"clusterArn\": \"<string>\",\n      \"clusterName\": \"<string>\",\n      \"status\": \"<string>\",\n      \"capacityProviders\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"defaultCapacityProviderStrategy\": [\n        {\n          \"capacityProvider\": \"<string>\",\n          \"weight\": \"<integer>\",\n          \"base\": \"<integer>\"\n        },\n        {\n          \"capacityProvider\": \"<string>\",\n          \"weight\": \"<integer>\",\n          \"base\": \"<integer>\"\n        }\n      ],\n      \"registeredContainerInstancesCount\": \"<integer>\",\n      \"runningTasksCount\": \"<integer>\",\n      \"pendingTasksCount\": \"<integer>\",\n      \"activeServicesCount\": \"<integer>\",\n      \"settings\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ],\n      \"tags\": [\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"key\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"failures\": [\n    {\n      \"arn\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"arn\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-eb573e33-6039-4794-9cb0-0739cac9cb4d"
+            },
+            {
+              "id": "fc2810f9-7135-43e0-8155-75831c7c197d",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include\": [\n    \"STATISTICS\",\n    \"ATTACHMENTS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-fc2810f9-7135-43e0-8155-75831c7c197d"
+            },
+            {
+              "id": "7d1c8dbc-76f7-4ab8-aa01-f0b192fc3dbc",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-amz-json-1.1"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"clusters\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"include\": [\n    \"STATISTICS\",\n    \"ATTACHMENTS\"\n  ]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeClusters"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"__type\": \"<string>\",\n  \"message\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:36:17.000Z",
+              "updatedAt": "2026-07-28T01:36:17.000Z",
+              "uid": "35240-7d1c8dbc-76f7-4ab8-aa01-f0b192fc3dbc"
+            }
+          ],
+          "createdAt": "2026-07-28T01:36:17.000Z",
+          "updatedAt": "2026-07-28T01:36:17.000Z",
+          "uid": "35240-b98f3a9a-5e16-420a-8474-0de7c210f1fe"
+        }
+      ],
+      "id": "0488886d-1657-4ed3-aded-7eb2c380db83",
+      "createdAt": "2026-07-28T01:36:17.000Z",
+      "updatedAt": "2026-07-28T01:36:17.000Z",
+      "uid": "35240-0488886d-1657-4ed3-aded-7eb2c380db83"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "region",
+      "value": "us-east-1"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://ecs.{{region}}.amazonaws.com"
+    }
+  ]
+}

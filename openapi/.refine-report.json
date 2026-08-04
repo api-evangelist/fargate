@@ -1,0 +1,28 @@
+{
+  "provider": "fargate",
+  "sources": [
+    "fargate-clusters-api-openapi.yml",
+    "fargate-task-definitions-api-openapi.yml",
+    "fargate-tasks-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-createservice-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-deleteservice-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-describeservices-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-listservices-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-updateservice-api-openapi.yml"
+  ],
+  "outputs": [
+    "fargate-clusters-api-openapi.yml",
+    "fargate-task-definitions-api-openapi.yml",
+    "fargate-tasks-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-createservice-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-deleteservice-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-describeservices-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-listservices-api-openapi.yml",
+    "fargate-x-amz-target-amazonec2containerservicev20141113-updateservice-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
