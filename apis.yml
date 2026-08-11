@@ -555,6 +555,12 @@ apis:
   - type: CLI Reference
     url: https://docs.aws.amazon.com/cli/latest/reference/eks/create-fargate-profile.html
 common:
+  - type: IssueTracker
+    url: https://github.com/aws/containers-roadmap/issues
+  - type: CodeOfConduct
+    url: https://github.com/aws/containers-roadmap/blob/master/CODE_OF_CONDUCT.md
+  - type: ContributionGuide
+    url: https://github.com/aws/containers-roadmap/blob/master/CONTRIBUTING.md
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/aws-fargate/overview
   - type: AgenticAccess
