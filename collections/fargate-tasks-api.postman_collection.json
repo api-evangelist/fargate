@@ -1,0 +1,1243 @@
+{
+  "item": [
+    {
+      "id": "76e882a0-3d11-45e1-a266-1930700c8ff1",
+      "name": "Tasks",
+      "description": {
+        "content": "Operations for running and managing individual Fargate tasks, including launching tasks, stopping tasks, and querying task status.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3989e11d-a299-41cc-8a57-fb69eaf4fd39",
+          "name": "AWS Fargate Run a Fargate task",
+          "request": {
+            "name": "AWS Fargate Run a Fargate task",
+            "description": {
+              "content": "Starts a new task using the specified task definition. When using the Fargate launch type, tasks run on AWS Fargate serverless infrastructure without the need to manage servers. The networkConfiguration parameter with awsvpcConfiguration is required for Fargate tasks. You can optionally specify a platformVersion, which defaults to LATEST. Each RunTask call can launch up to 10 tasks.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"count\": 1,\n  \"launchType\": \"<string>\",\n  \"capacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    },\n    {\n      \"capacityProvider\": \"<string>\",\n      \"weight\": \"<integer>\",\n      \"base\": \"<integer>\"\n    }\n  ],\n  \"platformVersion\": \"LATEST\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"securityGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"assignPublicIp\": \"<string>\"\n    }\n  },\n  \"overrides\": {\n    \"containerOverrides\": [\n      {\n        \"name\": \"<string>\",\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"command\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"name\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ],\n        \"cpu\": \"<integer>\",\n        \"memory\": \"<integer>\",\n        \"memoryReservation\": \"<integer>\"\n      }\n    ],\n    \"cpu\": \"<string>\",\n    \"memory\": \"<string>\",\n    \"taskRoleArn\": \"<string>\",\n    \"executionRoleArn\": \"<string>\",\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": \"<integer>\"\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"enableECSManagedTags\": \"<boolean>\",\n  \"propagateTags\": \"<string>\",\n  \"group\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"clientToken\": \"<string>\",\n  \"tags\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "aa1b5295-f6c1-48dd-9419-2962c9258cf1",
+              "name": "Task launched successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"count\": 1,\n  \"launchType\": \"<string>\",\n  \"capacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 131,\n      \"base\": 50995\n    },\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 655,\n      \"base\": 38221\n    }\n  ],\n  \"platformVersion\": \"LATEST\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"overrides\": {\n    \"containerOverrides\": [\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5121,\n        \"memory\": 8030,\n        \"memoryReservation\": 3103\n      },\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5806,\n        \"memory\": 4697,\n        \"memoryReservation\": 8275\n      }\n    ],\n    \"cpu\": \"string\",\n    \"memory\": \"string\",\n    \"taskRoleArn\": \"string\",\n    \"executionRoleArn\": \"string\",\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": 175\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"enableECSManagedTags\": \"<boolean>\",\n  \"propagateTags\": \"<string>\",\n  \"group\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"clientToken\": \"<string>\",\n  \"tags\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tasks\": [\n    {\n      \"taskArn\": \"string\",\n      \"clusterArn\": \"string\",\n      \"taskDefinitionArn\": \"string\",\n      \"launchType\": \"EC2\",\n      \"platformVersion\": \"string\",\n      \"platformFamily\": \"string\",\n      \"lastStatus\": \"string\",\n      \"desiredStatus\": \"string\",\n      \"cpu\": \"string\",\n      \"memory\": \"string\",\n      \"containers\": [\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 5101,\n          \"healthStatus\": \"UNKNOWN\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 927,\n              \"hostPort\": 3071,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 13,\n              \"hostPort\": 6304,\n              \"protocol\": \"string\"\n            }\n          ]\n        },\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 8701,\n          \"healthStatus\": \"HEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 1249,\n              \"hostPort\": 6532,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 4903,\n              \"hostPort\": 8317,\n              \"protocol\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"overrides\": {\n        \"containerOverrides\": [\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 7706,\n            \"memory\": 2561,\n            \"memoryReservation\": 9978\n          },\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 9366,\n            \"memory\": 3806,\n            \"memoryReservation\": 8217\n          }\n        ],\n        \"cpu\": \"string\",\n        \"memory\": \"string\",\n        \"taskRoleArn\": \"string\",\n        \"executionRoleArn\": \"string\",\n        \"ephemeralStorage\": {\n          \"sizeInGiB\": 93\n        }\n      },\n      \"group\": \"string\",\n      \"availabilityZone\": \"string\",\n      \"connectivity\": \"DISCONNECTED\",\n      \"healthStatus\": \"HEALTHY\",\n      \"enableExecuteCommand\": true,\n      \"startedBy\": \"string\",\n      \"stoppedReason\": \"string\",\n      \"createdAt\": \"2002-07-19T13:10:51.163Z\",\n      \"startedAt\": \"1946-12-02T06:34:21.238Z\",\n      \"stoppedAt\": \"1970-07-02T14:30:21.732Z\",\n      \"tags\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ephemeralStorage\": {\n        \"sizeInGiB\": 133\n      }\n    },\n    {\n      \"taskArn\": \"string\",\n      \"clusterArn\": \"string\",\n      \"taskDefinitionArn\": \"string\",\n      \"launchType\": \"EXTERNAL\",\n      \"platformVersion\": \"string\",\n      \"platformFamily\": \"string\",\n      \"lastStatus\": \"string\",\n      \"desiredStatus\": \"string\",\n      \"cpu\": \"string\",\n      \"memory\": \"string\",\n      \"containers\": [\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 1573,\n          \"healthStatus\": \"UNHEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 2743,\n              \"hostPort\": 3548,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 7456,\n              \"hostPort\": 1439,\n              \"protocol\": \"string\"\n            }\n          ]\n        },\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 1776,\n          \"healthStatus\": \"HEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 7030,\n              \"hostPort\": 22,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 1754,\n              \"hostPort\": 635,\n              \"protocol\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"overrides\": {\n        \"containerOverrides\": [\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 444,\n            \"memory\": 4705,\n            \"memoryReservation\": 6666\n          },\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 9784,\n            \"memory\": 732,\n            \"memoryReservation\": 3187\n          }\n        ],\n        \"cpu\": \"string\",\n        \"memory\": \"string\",\n        \"taskRoleArn\": \"string\",\n        \"executionRoleArn\": \"string\",\n        \"ephemeralStorage\": {\n          \"sizeInGiB\": 31\n        }\n      },\n      \"group\": \"string\",\n      \"availabilityZone\": \"string\",\n      \"connectivity\": \"CONNECTED\",\n      \"healthStatus\": \"UNKNOWN\",\n      \"enableExecuteCommand\": false,\n      \"startedBy\": \"string\",\n      \"stoppedReason\": \"string\",\n      \"createdAt\": \"2003-12-31T02:40:21.237Z\",\n      \"startedAt\": \"2008-02-10T16:42:50.683Z\",\n      \"stoppedAt\": \"1992-02-23T21:46:52.733Z\",\n      \"tags\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ephemeralStorage\": {\n        \"sizeInGiB\": 158\n      }\n    }\n  ],\n  \"failures\": [\n    {\n      \"arn\": \"string\",\n      \"reason\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"arn\": \"string\",\n      \"reason\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d59cea02-4ab1-43fe-a59f-6d4619e50b48",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"count\": 1,\n  \"launchType\": \"<string>\",\n  \"capacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 131,\n      \"base\": 50995\n    },\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 655,\n      \"base\": 38221\n    }\n  ],\n  \"platformVersion\": \"LATEST\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"overrides\": {\n    \"containerOverrides\": [\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5121,\n        \"memory\": 8030,\n        \"memoryReservation\": 3103\n      },\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5806,\n        \"memory\": 4697,\n        \"memoryReservation\": 8275\n      }\n    ],\n    \"cpu\": \"string\",\n    \"memory\": \"string\",\n    \"taskRoleArn\": \"string\",\n    \"executionRoleArn\": \"string\",\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": 175\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"enableECSManagedTags\": \"<boolean>\",\n  \"propagateTags\": \"<string>\",\n  \"group\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"clientToken\": \"<string>\",\n  \"tags\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c2a468e-b281-46ba-87e7-1f9786f8ab68",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.RunTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"taskDefinition\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"count\": 1,\n  \"launchType\": \"<string>\",\n  \"capacityProviderStrategy\": [\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 131,\n      \"base\": 50995\n    },\n    {\n      \"capacityProvider\": \"string\",\n      \"weight\": 655,\n      \"base\": 38221\n    }\n  ],\n  \"platformVersion\": \"LATEST\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"overrides\": {\n    \"containerOverrides\": [\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5121,\n        \"memory\": 8030,\n        \"memoryReservation\": 3103\n      },\n      {\n        \"name\": \"string\",\n        \"command\": [\n          \"string\",\n          \"string\"\n        ],\n        \"environment\": [\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          },\n          {\n            \"name\": \"string\",\n            \"value\": \"string\"\n          }\n        ],\n        \"cpu\": 5806,\n        \"memory\": 4697,\n        \"memoryReservation\": 8275\n      }\n    ],\n    \"cpu\": \"string\",\n    \"memory\": \"string\",\n    \"taskRoleArn\": \"string\",\n    \"executionRoleArn\": \"string\",\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": 175\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"enableECSManagedTags\": \"<boolean>\",\n  \"propagateTags\": \"<string>\",\n  \"group\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"clientToken\": \"<string>\",\n  \"tags\": [\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"key\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "66373f42-3d7a-4426-be47-23869cbcad40",
+          "name": "AWS Fargate Stop a running task",
+          "request": {
+            "name": "AWS Fargate Stop a running task",
+            "description": {
+              "content": "Stops a running task. When you call StopTask on a Fargate task, the equivalent of docker stop is issued to the containers running in the task. This results in a SIGTERM value and a default 30-second timeout, after which the SIGKILL value is sent and the containers are forcibly stopped. The task transitions through STOPPING to STOPPED.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "cc171e03-658c-4738-8de2-c3d40b37c5b8",
+              "name": "Task stop initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"task\": {\n    \"taskArn\": \"string\",\n    \"clusterArn\": \"string\",\n    \"taskDefinitionArn\": \"string\",\n    \"launchType\": \"FARGATE\",\n    \"platformVersion\": \"string\",\n    \"platformFamily\": \"string\",\n    \"lastStatus\": \"string\",\n    \"desiredStatus\": \"string\",\n    \"cpu\": \"string\",\n    \"memory\": \"string\",\n    \"containers\": [\n      {\n        \"containerArn\": \"string\",\n        \"taskArn\": \"string\",\n        \"name\": \"string\",\n        \"image\": \"string\",\n        \"imageDigest\": \"string\",\n        \"lastStatus\": \"string\",\n        \"exitCode\": 9720,\n        \"healthStatus\": \"UNKNOWN\",\n        \"networkInterfaces\": [\n          {\n            \"attachmentId\": \"string\",\n            \"privateIpv4Address\": \"string\",\n            \"ipv6Address\": \"string\"\n          },\n          {\n            \"attachmentId\": \"string\",\n            \"privateIpv4Address\": \"string\",\n            \"ipv6Address\": \"string\"\n          }\n        ],\n        \"networkBindings\": [\n          {\n            \"bindIP\": \"string\",\n            \"containerPort\": 7279,\n            \"hostPort\": 9919,\n            \"protocol\": \"string\"\n          },\n          {\n            \"bindIP\": \"string\",\n            \"containerPort\": 4725,\n            \"hostPort\": 7179,\n            \"protocol\": \"string\"\n          }\n        ]\n      },\n      {\n        \"containerArn\": \"string\",\n        \"taskArn\": \"string\",\n        \"name\": \"string\",\n        \"image\": \"string\",\n        \"imageDigest\": \"string\",\n        \"lastStatus\": \"string\",\n        \"exitCode\": 3112,\n        \"healthStatus\": \"UNHEALTHY\",\n        \"networkInterfaces\": [\n          {\n            \"attachmentId\": \"string\",\n            \"privateIpv4Address\": \"string\",\n            \"ipv6Address\": \"string\"\n          },\n          {\n            \"attachmentId\": \"string\",\n            \"privateIpv4Address\": \"string\",\n            \"ipv6Address\": \"string\"\n          }\n        ],\n        \"networkBindings\": [\n          {\n            \"bindIP\": \"string\",\n            \"containerPort\": 4878,\n            \"hostPort\": 2555,\n            \"protocol\": \"string\"\n          },\n          {\n            \"bindIP\": \"string\",\n            \"containerPort\": 2084,\n            \"hostPort\": 9315,\n            \"protocol\": \"string\"\n          }\n        ]\n      }\n    ],\n    \"overrides\": {\n      \"containerOverrides\": [\n        {\n          \"name\": \"string\",\n          \"command\": [\n            \"string\",\n            \"string\"\n          ],\n          \"environment\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"cpu\": 5219,\n          \"memory\": 1715,\n          \"memoryReservation\": 7877\n        },\n        {\n          \"name\": \"string\",\n          \"command\": [\n            \"string\",\n            \"string\"\n          ],\n          \"environment\": [\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"name\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"cpu\": 4464,\n          \"memory\": 4389,\n          \"memoryReservation\": 3336\n        }\n      ],\n      \"cpu\": \"string\",\n      \"memory\": \"string\",\n      \"taskRoleArn\": \"string\",\n      \"executionRoleArn\": \"string\",\n      \"ephemeralStorage\": {\n        \"sizeInGiB\": 110\n      }\n    },\n    \"group\": \"string\",\n    \"availabilityZone\": \"string\",\n    \"connectivity\": \"CONNECTED\",\n    \"healthStatus\": \"UNHEALTHY\",\n    \"enableExecuteCommand\": false,\n    \"startedBy\": \"string\",\n    \"stoppedReason\": \"string\",\n    \"createdAt\": \"2018-09-19T15:40:36.091Z\",\n    \"startedAt\": \"2025-03-22T07:32:51.012Z\",\n    \"stoppedAt\": \"1976-04-12T02:34:23.217Z\",\n    \"tags\": [\n      {\n        \"key\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"value\": \"string\"\n      }\n    ],\n    \"ephemeralStorage\": {\n      \"sizeInGiB\": 140\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4c4772f-25dc-4fb3-81f8-1b40125ac756",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98f4469e-bf28-4e67-8df2-480d71a280a4",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.StopTask",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"reason\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6e814cd-d97c-4e3b-b57e-36f3b028810f",
+          "name": "AWS Fargate Describe one or more tasks",
+          "request": {
+            "name": "AWS Fargate Describe one or more tasks",
+            "description": {
+              "content": "Describes a specified task or tasks. Returns detailed information about each task, including its current status, launch type, platform version, container details, and network configuration. Up to 100 tasks can be described in a single call.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tasks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cluster\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "6417ae34-49a9-4181-8be5-af0f4475c4ad",
+              "name": "Tasks described successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cluster\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tasks\": [\n    {\n      \"taskArn\": \"string\",\n      \"clusterArn\": \"string\",\n      \"taskDefinitionArn\": \"string\",\n      \"launchType\": \"EC2\",\n      \"platformVersion\": \"string\",\n      \"platformFamily\": \"string\",\n      \"lastStatus\": \"string\",\n      \"desiredStatus\": \"string\",\n      \"cpu\": \"string\",\n      \"memory\": \"string\",\n      \"containers\": [\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 3625,\n          \"healthStatus\": \"UNHEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 2802,\n              \"hostPort\": 8312,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 2568,\n              \"hostPort\": 8578,\n              \"protocol\": \"string\"\n            }\n          ]\n        },\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 1985,\n          \"healthStatus\": \"UNHEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 1949,\n              \"hostPort\": 4686,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 9072,\n              \"hostPort\": 7460,\n              \"protocol\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"overrides\": {\n        \"containerOverrides\": [\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 2363,\n            \"memory\": 7994,\n            \"memoryReservation\": 5736\n          },\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 8767,\n            \"memory\": 2503,\n            \"memoryReservation\": 9835\n          }\n        ],\n        \"cpu\": \"string\",\n        \"memory\": \"string\",\n        \"taskRoleArn\": \"string\",\n        \"executionRoleArn\": \"string\",\n        \"ephemeralStorage\": {\n          \"sizeInGiB\": 177\n        }\n      },\n      \"group\": \"string\",\n      \"availabilityZone\": \"string\",\n      \"connectivity\": \"DISCONNECTED\",\n      \"healthStatus\": \"UNKNOWN\",\n      \"enableExecuteCommand\": false,\n      \"startedBy\": \"string\",\n      \"stoppedReason\": \"string\",\n      \"createdAt\": \"2016-01-19T11:49:08.129Z\",\n      \"startedAt\": \"1996-01-30T02:43:05.803Z\",\n      \"stoppedAt\": \"2008-01-27T05:55:07.752Z\",\n      \"tags\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ephemeralStorage\": {\n        \"sizeInGiB\": 99\n      }\n    },\n    {\n      \"taskArn\": \"string\",\n      \"clusterArn\": \"string\",\n      \"taskDefinitionArn\": \"string\",\n      \"launchType\": \"FARGATE\",\n      \"platformVersion\": \"string\",\n      \"platformFamily\": \"string\",\n      \"lastStatus\": \"string\",\n      \"desiredStatus\": \"string\",\n      \"cpu\": \"string\",\n      \"memory\": \"string\",\n      \"containers\": [\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 5490,\n          \"healthStatus\": \"UNKNOWN\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 9009,\n              \"hostPort\": 1683,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 57,\n              \"hostPort\": 1504,\n              \"protocol\": \"string\"\n            }\n          ]\n        },\n        {\n          \"containerArn\": \"string\",\n          \"taskArn\": \"string\",\n          \"name\": \"string\",\n          \"image\": \"string\",\n          \"imageDigest\": \"string\",\n          \"lastStatus\": \"string\",\n          \"exitCode\": 3001,\n          \"healthStatus\": \"UNHEALTHY\",\n          \"networkInterfaces\": [\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            },\n            {\n              \"attachmentId\": \"string\",\n              \"privateIpv4Address\": \"string\",\n              \"ipv6Address\": \"string\"\n            }\n          ],\n          \"networkBindings\": [\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 5259,\n              \"hostPort\": 7266,\n              \"protocol\": \"string\"\n            },\n            {\n              \"bindIP\": \"string\",\n              \"containerPort\": 7415,\n              \"hostPort\": 5231,\n              \"protocol\": \"string\"\n            }\n          ]\n        }\n      ],\n      \"overrides\": {\n        \"containerOverrides\": [\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 5688,\n            \"memory\": 2077,\n            \"memoryReservation\": 7527\n          },\n          {\n            \"name\": \"string\",\n            \"command\": [\n              \"string\",\n              \"string\"\n            ],\n            \"environment\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"cpu\": 104,\n            \"memory\": 980,\n            \"memoryReservation\": 8589\n          }\n        ],\n        \"cpu\": \"string\",\n        \"memory\": \"string\",\n        \"taskRoleArn\": \"string\",\n        \"executionRoleArn\": \"string\",\n        \"ephemeralStorage\": {\n          \"sizeInGiB\": 92\n        }\n      },\n      \"group\": \"string\",\n      \"availabilityZone\": \"string\",\n      \"connectivity\": \"CONNECTED\",\n      \"healthStatus\": \"HEALTHY\",\n      \"enableExecuteCommand\": true,\n      \"startedBy\": \"string\",\n      \"stoppedReason\": \"string\",\n      \"createdAt\": \"1976-04-27T22:03:15.358Z\",\n      \"startedAt\": \"1964-02-02T05:23:00.634Z\",\n      \"stoppedAt\": \"2013-07-27T17:25:56.587Z\",\n      \"tags\": [\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"key\": \"string\",\n          \"value\": \"string\"\n        }\n      ],\n      \"ephemeralStorage\": {\n        \"sizeInGiB\": 73\n      }\n    }\n  ],\n  \"failures\": [\n    {\n      \"arn\": \"string\",\n      \"reason\": \"string\",\n      \"detail\": \"string\"\n    },\n    {\n      \"arn\": \"string\",\n      \"reason\": \"string\",\n      \"detail\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21470793-d938-4962-bb55-c14a4e7c8e29",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cluster\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c55bc49-4a96-4ff4-baf8-b436fd051a4e",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tasks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"cluster\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4cdfb18a-5249-4020-9f7e-40560bdae9e7",
+          "name": "AWS Fargate List tasks in a cluster",
+          "request": {
+            "name": "AWS Fargate List tasks in a cluster",
+            "description": {
+              "content": "Returns a list of tasks. You can filter the results by cluster, service, family, or launch type. Specify launchType FARGATE to list only Fargate tasks. Tasks can also be filtered by desired status or started-by value.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"cluster\": \"<string>\",\n  \"serviceName\": \"<string>\",\n  \"family\": \"<string>\",\n  \"launchType\": \"<string>\",\n  \"desiredStatus\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "7a963743-e0d7-442a-8dda-81141e2ffc5b",
+              "name": "List of task ARNs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster\": \"<string>\",\n  \"serviceName\": \"<string>\",\n  \"family\": \"<string>\",\n  \"launchType\": \"<string>\",\n  \"desiredStatus\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"taskArns\": [\n    \"string\",\n    \"string\"\n  ],\n  \"nextToken\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e0599c9-545c-4b15-a871-06ad7770ed5b",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster\": \"<string>\",\n  \"serviceName\": \"<string>\",\n  \"family\": \"<string>\",\n  \"launchType\": \"<string>\",\n  \"desiredStatus\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9b6cf24-1fe0-487a-8d0b-f3e71b723444",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTasks",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"cluster\": \"<string>\",\n  \"serviceName\": \"<string>\",\n  \"family\": \"<string>\",\n  \"launchType\": \"<string>\",\n  \"desiredStatus\": \"<string>\",\n  \"startedBy\": \"<string>\",\n  \"nextToken\": \"<string>\",\n  \"maxResults\": \"<integer>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97d2eb90-0956-4186-a5bc-786784c1940e",
+          "name": "AWS Fargate Execute a command in a Fargate task container",
+          "request": {
+            "name": "AWS Fargate Execute a command in a Fargate task container",
+            "description": {
+              "content": "Runs a command remotely and securely inside a container running on a Fargate task. ECS Exec uses AWS Systems Manager Session Manager to establish a connection with the container and uses AWS IAM policies to control access. The task must have been launched with enableExecuteCommand set to true.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"command\": \"<string>\",\n  \"interactive\": \"<boolean>\",\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"container\": \"<string>\"\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "2224ce08-8217-4303-b629-9c3ef8f16fed",
+              "name": "Command session initiated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"<string>\",\n  \"interactive\": \"<boolean>\",\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"container\": \"<string>\"\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"clusterArn\": \"string\",\n  \"containerArn\": \"string\",\n  \"containerName\": \"string\",\n  \"interactive\": false,\n  \"session\": {\n    \"sessionId\": \"string\",\n    \"streamUrl\": \"string\",\n    \"tokenValue\": \"string\"\n  },\n  \"taskArn\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c7141429-fa88-4682-ae30-37f4636b1e60",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"<string>\",\n  \"interactive\": \"<boolean>\",\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"container\": \"<string>\"\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da3ffd62-7409-4fbc-b7b4-8308271908d3",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.ExecuteCommand",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"command\": \"<string>\",\n  \"interactive\": \"<boolean>\",\n  \"task\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"container\": \"<string>\"\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://ecs.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4b969e84-bb1d-4a44-9413-19c6f00e6ed1",
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters Tasks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

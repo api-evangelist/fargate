@@ -1,0 +1,295 @@
+{
+  "item": [
+    {
+      "id": "248f66ea-2ed7-4c7a-8d32-9ef9ecd283e3",
+      "name": "#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c9a23af-b12a-4fa7-8257-39cc0b6a7555",
+          "name": "AWS Fargate Update a Fargate service",
+          "request": {
+            "name": "AWS Fargate Update a Fargate service",
+            "description": {
+              "content": "Updates the specified service. You can update the task definition, desired count, deployment configuration, network configuration, and platform version for Fargate services. When you update a service, a new deployment is started that replaces existing tasks with tasks from the new configuration according to the deployment strategy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                ""
+              ],
+              "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                  "type": "any",
+                  "value": "{{region}}",
+                  "key": "region"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                "key": "X-Amz-Target",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/x-amz-json-1.1"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"taskDefinition\": \"<string>\",\n  \"desiredCount\": \"<integer>\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"securityGroups\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"assignPublicIp\": \"<string>\"\n    }\n  },\n  \"platformVersion\": \"<string>\",\n  \"deploymentConfiguration\": {\n    \"maximumPercent\": 200,\n    \"minimumHealthyPercent\": 100,\n    \"deploymentCircuitBreaker\": {\n      \"enable\": \"<boolean>\",\n      \"rollback\": \"<boolean>\"\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"forceNewDeployment\": \"<boolean>\",\n  \"loadBalancers\": [\n    {\n      \"targetGroupArn\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"containerPort\": \"<integer>\"\n    },\n    {\n      \"targetGroupArn\": \"<string>\",\n      \"containerName\": \"<string>\",\n      \"containerPort\": \"<integer>\"\n    }\n  ]\n}"
+            }
+          },
+          "response": [
+            {
+              "id": "cd8cfc25-9ea1-40b4-ae98-6a121a3303fc",
+              "name": "Service updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"taskDefinition\": \"<string>\",\n  \"desiredCount\": \"<integer>\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"platformVersion\": \"<string>\",\n  \"deploymentConfiguration\": {\n    \"maximumPercent\": 200,\n    \"minimumHealthyPercent\": 100,\n    \"deploymentCircuitBreaker\": {\n      \"enable\": true,\n      \"rollback\": true\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"forceNewDeployment\": \"<boolean>\",\n  \"loadBalancers\": [\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 4028\n    },\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 358\n    }\n  ]\n}"
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"service\": {\n    \"serviceArn\": \"string\",\n    \"serviceName\": \"string\",\n    \"clusterArn\": \"string\",\n    \"taskDefinition\": \"string\",\n    \"status\": \"string\",\n    \"desiredCount\": 3963,\n    \"runningCount\": 8554,\n    \"pendingCount\": 7273,\n    \"launchType\": \"EXTERNAL\",\n    \"platformVersion\": \"string\",\n    \"platformFamily\": \"string\",\n    \"schedulingStrategy\": \"DAEMON\",\n    \"networkConfiguration\": {\n      \"awsvpcConfiguration\": {\n        \"subnets\": [\n          \"string\",\n          \"string\"\n        ],\n        \"securityGroups\": [\n          \"string\",\n          \"string\"\n        ],\n        \"assignPublicIp\": \"DISABLED\"\n      }\n    },\n    \"deploymentConfiguration\": {\n      \"maximumPercent\": 200,\n      \"minimumHealthyPercent\": 100,\n      \"deploymentCircuitBreaker\": {\n        \"enable\": true,\n        \"rollback\": true\n      }\n    },\n    \"deployments\": [\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"taskDefinition\": \"string\",\n        \"desiredCount\": 7979,\n        \"runningCount\": 4347,\n        \"pendingCount\": 9864,\n        \"launchType\": \"string\",\n        \"platformVersion\": \"string\",\n        \"rolloutState\": \"IN_PROGRESS\",\n        \"createdAt\": \"1965-12-16T07:32:03.948Z\",\n        \"updatedAt\": \"1961-12-16T22:49:11.837Z\",\n        \"networkConfiguration\": {\n          \"awsvpcConfiguration\": {\n            \"subnets\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"securityGroups\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"assignPublicIp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      {\n        \"id\": \"string\",\n        \"status\": \"string\",\n        \"taskDefinition\": \"string\",\n        \"desiredCount\": 3694,\n        \"runningCount\": 4448,\n        \"pendingCount\": 6309,\n        \"launchType\": \"string\",\n        \"platformVersion\": \"string\",\n        \"rolloutState\": \"COMPLETED\",\n        \"createdAt\": \"2018-06-07T01:41:19.670Z\",\n        \"updatedAt\": \"1970-12-24T14:57:44.883Z\",\n        \"networkConfiguration\": {\n          \"awsvpcConfiguration\": {\n            \"subnets\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"securityGroups\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"assignPublicIp\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      }\n    ],\n    \"loadBalancers\": [\n      {\n        \"targetGroupArn\": \"string\",\n        \"containerName\": \"string\",\n        \"containerPort\": 1893\n      },\n      {\n        \"targetGroupArn\": \"string\",\n        \"containerName\": \"string\",\n        \"containerPort\": 6864\n      }\n    ],\n    \"serviceRegistries\": [\n      {\n        \"registryArn\": \"string\",\n        \"port\": 9626,\n        \"containerName\": \"string\",\n        \"containerPort\": 9765\n      },\n      {\n        \"registryArn\": \"string\",\n        \"port\": 5430,\n        \"containerName\": \"string\",\n        \"containerPort\": 5337\n      }\n    ],\n    \"enableExecuteCommand\": true,\n    \"createdAt\": \"2023-11-28T04:08:31.264Z\",\n    \"createdBy\": \"string\",\n    \"tags\": [\n      {\n        \"key\": \"string\",\n        \"value\": \"string\"\n      },\n      {\n        \"key\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c8fa64f-0a01-424a-b31d-b90f4037a662",
+              "name": "Client error. The request was invalid, contained incorrect parameters, or the caller does not have required permissions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"taskDefinition\": \"<string>\",\n  \"desiredCount\": \"<integer>\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"platformVersion\": \"<string>\",\n  \"deploymentConfiguration\": {\n    \"maximumPercent\": 200,\n    \"minimumHealthyPercent\": 100,\n    \"deploymentCircuitBreaker\": {\n      \"enable\": true,\n      \"rollback\": true\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"forceNewDeployment\": \"<boolean>\",\n  \"loadBalancers\": [\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 4028\n    },\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 358\n    }\n  ]\n}"
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e747a0a-72c5-4059-851a-9b73358c1641",
+              "name": "Server error. An internal service error occurred.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    ""
+                  ],
+                  "hash": "X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+                      "type": "any",
+                      "value": "{{region}}",
+                      "key": "region"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "(Required) The ECS API action target header used for JSON-RPC style routing.",
+                    "key": "X-Amz-Target",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"service\": \"<string>\",\n  \"cluster\": \"<string>\",\n  \"taskDefinition\": \"<string>\",\n  \"desiredCount\": \"<integer>\",\n  \"networkConfiguration\": {\n    \"awsvpcConfiguration\": {\n      \"subnets\": [\n        \"string\",\n        \"string\"\n      ],\n      \"securityGroups\": [\n        \"string\",\n        \"string\"\n      ],\n      \"assignPublicIp\": \"ENABLED\"\n    }\n  },\n  \"platformVersion\": \"<string>\",\n  \"deploymentConfiguration\": {\n    \"maximumPercent\": 200,\n    \"minimumHealthyPercent\": 100,\n    \"deploymentCircuitBreaker\": {\n      \"enable\": true,\n      \"rollback\": true\n    }\n  },\n  \"enableExecuteCommand\": \"<boolean>\",\n  \"forceNewDeployment\": \"<boolean>\",\n  \"loadBalancers\": [\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 4028\n    },\n    {\n      \"targetGroupArn\": \"string\",\n      \"containerName\": \"string\",\n      \"containerPort\": 358\n    }\n  ]\n}"
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"__type\": \"string\",\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "AWS region (This can only be one of us-east-1,us-east-2,us-west-1,us-west-2,eu-west-1,eu-west-2,eu-west-3,eu-central-1,eu-north-1,ap-southeast-1,ap-southeast-2,ap-northeast-1,ap-northeast-2,ap-south-1,sa-east-1,ca-central-1)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "us-east-1",
+      "key": "region"
+    },
+    {
+      "type": "string",
+      "value": "https://ecs.{{region}}.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18fd48b6-5526-4695-8f01-3a66642e5bc7",
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amazon ECS API provides programmatic access to manage Fargate tasks and services through Amazon Elastic Container Service. AWS Fargate is a serverless compute engine for containers that removes the need to provision and manage servers. This specification covers the core ECS API operations relevant to Fargate workloads, including registering task definitions with Fargate compatibility, running tasks on Fargate infrastructure, and managing services with the Fargate launch type. All operations use the JSON-RPC style with POST requests and an X-Amz-Target header specifying the action.\n\nContact Support:\n Name: Amazon Web Services",
+      "type": "text/plain"
+    }
+  }
+}

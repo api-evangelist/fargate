@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters Task Definitions API",
+    "version": "2014-11-13"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Task Definitions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Register a Fargate task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.RegisterTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Registers a new task definition from the supplied family and container definitions. For Fargate tasks, the networkMode must be awsvpc, and task-level cpu and memory values are required. Use the requiresCompatibilities parameter with FARGATE to validate that all parameters meet Fargate requirements. The task definition is used to run tasks directly or as part of a service."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Describe a task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes a task definition. You can specify a family and revision to find a specific task definition, or you can provide the family name alone to get the latest ACTIVE revision in that family. This is useful for inspecting the Fargate CPU, memory, and networking configuration of a registered task definition."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate List task definitions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.ListTaskDefinitions",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns a list of task definitions that are registered to your account. You can filter the results by family name to retrieve all revisions of a particular task definition family. Use the status filter to list only ACTIVE or INACTIVE task definitions."
+        },
+        {
+          "info": {
+            "name": "AWS Fargate Deregister a task definition",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeregisterTaskDefinition",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deregisters the specified task definition by family and revision. Upon deregistration, the task definition is marked as INACTIVE. Existing tasks and services that reference an INACTIVE task definition continue to run without disruption. You cannot use an INACTIVE task definition to run new tasks or create new services."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

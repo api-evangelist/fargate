@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService API",
+    "version": "2014-11-13"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Update a Fargate service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.UpdateService",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified service. You can update the task definition, desired count, deployment configuration, network configuration, and platform version for Fargate services. When you update a service, a new deployment is started that replaces existing tasks with tasks from the new configuration according to the deployment strategy."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

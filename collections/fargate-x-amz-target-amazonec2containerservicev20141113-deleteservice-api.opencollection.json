@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.DeleteService API",
+    "version": "2014-11-13"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "#X Amz Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Delete a service",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DeleteService",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes the specified service within a cluster. You can delete a service if you have no running tasks in it and the desired count is zero. If the service uses a load balancer, the load balancer configuration is removed. If the service was created using a Fargate launch type, the tasks are stopped."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

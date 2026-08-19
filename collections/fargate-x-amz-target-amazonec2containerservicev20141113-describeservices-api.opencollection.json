@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AWS Fargate Amazon ECS API (Fargate) Clusters #X Amz Target=AmazonEC2ContainerServiceV20141113.DescribeServices API",
+    "version": "2014-11-13"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "#X Amz Target=AmazonEC2ContainerServiceV20141113.DescribeServices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AWS Fargate Describe one or more services",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://ecs.{region}.amazonaws.com/#X-Amz-Target=AmazonEC2ContainerServiceV20141113.DescribeServices",
+            "headers": [
+              {
+                "name": "X-Amz-Target",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Describes the specified services running in a cluster. Returns detailed information about each service, including its status, task definition, desired and running count, deployments, load balancers, and network configuration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
