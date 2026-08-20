@@ -37,6 +37,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
   tags:
+  - Cluster
+  tags_raw:
   - Clusters
   properties:
   - type: OpenAPI
@@ -167,6 +169,8 @@ apis:
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
   tags:
+  - Task
+  tags_raw:
   - Tasks
   properties:
   - type: OpenAPI
@@ -231,7 +235,8 @@ apis:
     for #x amz target=amazonec2containerservicev20141113.createservice.
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - '#X Amz Target=AmazonEC2ContainerServiceV20141113.CreateService'
   properties:
   - type: OpenAPI
@@ -297,7 +302,8 @@ apis:
     for #x amz target=amazonec2containerservicev20141113.deleteservice.
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - '#X Amz Target=AmazonEC2ContainerServiceV20141113.DeleteService'
   properties:
   - type: OpenAPI
@@ -363,7 +369,8 @@ apis:
     for #x amz target=amazonec2containerservicev20141113.describeservices.
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - '#X Amz Target=AmazonEC2ContainerServiceV20141113.DescribeServices'
   properties:
   - type: OpenAPI
@@ -429,7 +436,8 @@ apis:
     for #x amz target=amazonec2containerservicev20141113.listservices.
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - '#X Amz Target=AmazonEC2ContainerServiceV20141113.ListServices'
   properties:
   - type: OpenAPI
@@ -495,7 +503,8 @@ apis:
     for #x amz target=amazonec2containerservicev20141113.updateservice.
   humanURL: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/
   baseURL: https://ecs.{region}.amazonaws.com
-  tags:
+  tags: []
+  tags_raw:
   - '#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService'
   properties:
   - type: OpenAPI
