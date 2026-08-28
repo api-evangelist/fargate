@@ -5,6 +5,19 @@ description: >-
   Service (ECS) and Amazon Elastic Kubernetes Service (EKS). It removes the need to provision and manage servers,
   letting you focus on building and running applications without managing infrastructure.
 url: https://aws.amazon.com/fargate/
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: true
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - pricing
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -564,6 +577,9 @@ apis:
   - type: CLI Reference
     url: https://docs.aws.amazon.com/cli/latest/reference/eks/create-fargate-profile.html
 common:
+  - type: CapabilityMap
+    url: capabilities/fargate-capability-edges.yml
+    name: AWS Fargate Business Capability Map
   - type: IssueTracker
     url: https://github.com/aws/containers-roadmap/issues
   - type: CodeOfConduct

@@ -1,0 +1,98 @@
+slug: fargate
+provider: AWS Fargate
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: Clusters
+  spec_file: fargate-clusters-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.85
+  evidence: POST ...CreateCluster  AWS Fargate Create an ECS cluster — "serverless compute engine for
+    containers"
+  reason: Creating/describing container compute clusters is IT infrastructure (compute) management, not
+    a business capability of any industry domain.
+- tag: '#X Amz Target=AmazonEC2ContainerServiceV20141113.CreateService'
+  spec_file: fargate-x-amz-target-amazonec2containerservicev20141113-createservice-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: createService — "AWS Fargate Create a Fargate service"; schemas NetworkConfiguration, AwsVpcConfiguration,
+    CapacityProviderStrategyItem
+  reason: Provisioning a container service on serverless compute with VPC networking and capacity-provider
+    strategy is cloud compute/network infrastructure management. Could arguably be deployment orchestration,
+    hence not higher confidence.
+- tag: '#X Amz Target=AmazonEC2ContainerServiceV20141113.DeleteService'
+  spec_file: fargate-x-amz-target-amazonec2containerservicev20141113-deleteservice-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: deleteService — "AWS Fargate Delete a service"; schemas NetworkConfiguration, AwsVpcConfiguration,
+    DeploymentConfiguration
+  reason: Decommissioning a running container workload on cloud compute infrastructure. Infrastructure
+    lifecycle management rather than any industry business function.
+- tag: Task Definitions
+  spec_file: fargate-task-definitions-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.75
+  evidence: registerTaskDefinition  AWS Fargate Register a Fargate task definition; schemas RuntimePlatform,
+    ContainerDefinition, EphemeralStorage
+  reason: Defining container workload specs (CPU/memory, images, volumes) is cloud compute infrastructure
+    configuration; closest honest fit is IT Infrastructure Management.
+- tag: '#X Amz Target=AmazonEC2ContainerServiceV20141113.DescribeServices'
+  spec_file: fargate-x-amz-target-amazonec2containerservicev20141113-describeservices-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: describeServices — "AWS Fargate Describe one or more services"; schemas Service, Deployment,
+    Failure
+  reason: Read-only inspection of container services and their deployments on cloud compute. Sits within
+    IT infrastructure management; purely descriptive so slightly lower confidence.
+- tag: '#X Amz Target=AmazonEC2ContainerServiceV20141113.ListServices'
+  spec_file: fargate-x-amz-target-amazonec2containerservicev20141113-listservices-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: listServices — "AWS Fargate List services in a cluster"
+  reason: Enumeration of container workloads within a compute cluster — cloud infrastructure inventory.
+    Thin surface (only ErrorResponse schema), so confidence kept moderate.
+- tag: '#X Amz Target=AmazonEC2ContainerServiceV20141113.UpdateService'
+  spec_file: fargate-x-amz-target-amazonec2containerservicev20141113-updateservice-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: updateService — "AWS Fargate Update a Fargate service"; schemas UpdateServiceRequest, Deployment,
+    DeploymentConfiguration
+  reason: Modifying a running container service including its deployment configuration on serverless compute.
+    Primarily cloud infrastructure management, though it overlaps with deployment orchestration, so confidence
+    is moderate.
+- tag: Tasks
+  spec_file: fargate-tasks-api-openapi.yml
+  capability_id: BC-600.50
+  capability_id_l1: BC-600
+  capability_name: IT Infrastructure Management
+  confidence: 0.7
+  evidence: '"AWS Fargate Run a Fargate task", "running tasks on Fargate infrastructure" — "serverless
+    compute engine for containers"'
+  reason: Operations run, stop, list and exec into container tasks on managed compute. This is provisioning
+    and operating compute infrastructure (IT Infrastructure Management), not any industry business capability.
+    Some overlap with deployment orchestration, hence not higher confidence.
